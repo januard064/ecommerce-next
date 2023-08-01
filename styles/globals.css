@@ -17,6 +17,22 @@
 }
 
 @font-face {
+  font-family: "Poppins-Light";
+  src: url('../font-family/Poppins/Poppins-Light.ttf');
+}
+
+@font-face {
+  font-family: "Poppins-Regular";
+  src: url('../font-family/Poppins/Poppins-Regular.ttf');
+}
+
+
+@font-face {
+  font-family: "Poppins-SemiBold";
+  src: url('../font-family/Poppins/Poppins-SemiBold.ttf');
+}
+
+@font-face {
   font-family: "Poppins-Bold";
   src: url('../font-family/Poppins/Poppins-Bold.ttf');
 }
@@ -25,6 +41,8 @@
   font-family: "Poppins-Italic";
   src: url('../font-family/Poppins/Poppins-Italic.ttf');
 }
+
+
 
 body {
   color: rgb(var(--foreground-rgb));
