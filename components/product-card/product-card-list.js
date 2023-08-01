@@ -2,7 +2,7 @@ import ProductCard from "./product-card"
 
 const ProductCardList = () => {
     return (
-        <div  class="flex justify-center">
+        <div  class="flex">
             <ProductCard />
         </div>
     )
