@@ -1,6 +1,6 @@
 const Carousel = () => {
     return (
-        <div class="h-36 w-full bg-[#212844]">
+        <div className="h-36 w-full bg-[#212844]">
             <div>Carousel Title</div>
         </div>
     )

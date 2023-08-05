@@ -3,7 +3,7 @@ import ProductCardList from "../product-card/product-card-list"
 
 const FeaturedProductSection = () => {
     return (
-        <div class="mt-[120px]">
+        <div className="mt-[120px]">
             <TitleSeparator firstTitle={'Grab the best deal on'} secondTitle={'Smartphones'} />
             <ProductCardList />
         </div>

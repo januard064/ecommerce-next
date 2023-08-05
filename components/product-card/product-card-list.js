@@ -3,9 +3,9 @@ import ProductCard from "./product-card"
 const ProductCardList = () => {
     return (
         <>
-            <div class="flex">
+            <div className="flex">
                 {[0, 1, 2, 3, 4].map((res) => (
-                    <div class="mr-4">
+                    <div className="mr-4">
                         <ProductCard />
                     </div>
                 ))}
