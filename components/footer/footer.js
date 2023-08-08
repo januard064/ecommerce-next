@@ -1,5 +1,8 @@
 import NavigationLayout from "../navigation-layout/navigation-layout"
 import InstagramLogo from "../icons/instagram-logo"
+import TwitterLogo from "../icons/twitter-logo"
+import LinkedInLogo from "../icons/linkedIn-logo"
+import FacebookLogo from "../icons/facebook-logo"
 
 const customerServiceList = {
     title: 'Customer Service',
@@ -45,6 +48,26 @@ const mostPopularList = {
     ]
 }
 
+const socialMediaList = [
+    {
+        link: 'https://www.instagram.com/',
+        logo: <InstagramLogo />
+    },
+    {
+        link: 'https://twitter.com/',
+        logo: <TwitterLogo />
+    },
+    {
+        link: 'https://facebook.com/',
+        logo: <FacebookLogo />
+    },
+    {
+        link: 'https://www.linkedin.com/',
+        logo: <LinkedInLogo />
+    },
+]
+
+
 
 const List = (props) => {
     const { menu } = props
@@ -87,8 +110,17 @@ const Footer = () => {
                         </div>
                         <div className="h-[48px] w-full absolute bottom-0 border-t-2 border-[#05ABF3] 
                                         flex justify-between items-center">
-                            <p style={{ justifyContent: 'Poppins-ExtraLight' }} className="text-[14px]">Copyright 2022 Next-Ecommerce</p>
-                            <InstagramLogo />
+                            <p style={{ justifyContent: 'Poppins-ExtraLight' }} className="text-[14px]">Copyright 2023 Next-Ecommerce</p>
+                            <div className="flex ">
+                                {socialMediaList.map((socmed) => (
+                                    <div className="ml-4 cursor-pointer">
+                                        <a href={socmed.link} target="_blank">
+                                            {socmed.logo}
+                                        </a>
+                                    </div>
+                                ))}
+                            </div>
+
                         </div>
                     </div>
                 </NavigationLayout>
