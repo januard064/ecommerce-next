@@ -1,12 +1,18 @@
 import ProductCard from "./product-card"
 
-const ProductCardList = () => {
+const ProductCardList = (props) => {
+
+    const { products } = props
+
+    if(!products){
+        return 
+    }
     return (
         <>
             <div className="flex">
-                {[0, 1, 2, ].map((res) => (
+                {products.map((product) => (
                     <div className="mr-4">
-                        <ProductCard />
+                        <ProductCard product={product} />
                     </div>
                 ))}
             </div>

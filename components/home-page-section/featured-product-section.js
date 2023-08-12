@@ -1,11 +1,13 @@
 import TitleSeparator from "../title-separator/title-separator"
 import ProductCardList from "../product-card/product-card-list"
 
-const FeaturedProductSection = () => {
+const FeaturedProductSection = (props) => {
+    console.log('{props.featuredProducts}',props.featuredProducts)
     return (
         <div className="mt-[120px]">
-            <TitleSeparator firstTitle={'Grab the best deal on'} secondTitle={'Smartphones'} />
-            <ProductCardList />
+            <TitleSeparator firstTitle={'Grab our'} secondTitle={'best selling product'} />
+            
+            <ProductCardList products={props.featuredProducts} />
         </div>
     )
 }
