@@ -3,15 +3,14 @@ import { Inter } from 'next/font/google'
 import CarouselComponent from '@/components/carousel/carousel'
 import FeaturedProductSection from '@/components/home-page-section/featured-product-section'
 import CategoryProductSection from '@/components/home-page-section/category-product-section'
-import { getFeaturedProducts, getProducts } from '@/api-helpers/api-utils'
+import { getFeaturedProducts, getProducts, getCategoryProducts } from '@/api-helpers/api-utils'
+import { convertCategories } from '@/api-helpers/api-format-utils'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home(props) {
 
-  const { featuredProducts } = props
-
-  console.log('featuredProducts', featuredProducts)
+  const { featuredProducts, categories } = props
 
   return (
     <>
@@ -19,7 +18,7 @@ export default function Home(props) {
 
       <FeaturedProductSection featuredProducts={featuredProducts} />
 
-      <CategoryProductSection />
+      <CategoryProductSection categories={categories} />
 
       <FeaturedProductSection />
 
@@ -29,14 +28,19 @@ export default function Home(props) {
 
 export async function getStaticProps() {
 
-  // const allProducts = await getProducts()
-
+  // fetch featuredProducts
   const featuredProducts = await getFeaturedProducts()
+
+  // fetch category from API
+  const categoryArray = await getCategoryProducts()
+  // convert array of category to insert custom image
+  const productCategories = convertCategories(categoryArray)
+  const feturedCategory = productCategories.slice(0, 7)
 
   return {
     props: {
-      // products: allProducts,
-      featuredProducts: featuredProducts
+      featuredProducts: featuredProducts,
+      categories: feturedCategory
     },
     revalidate: 1800
   }

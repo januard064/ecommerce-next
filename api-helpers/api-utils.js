@@ -15,3 +15,12 @@ export async function getFeaturedProducts() {
 
     return featuredProducts
 }
+
+export async function getCategoryProducts() {
+
+    const response = await fetch('https://dummyjson.com/products/categories')
+
+    const productCategories = response.json()
+
+    return productCategories
+}
