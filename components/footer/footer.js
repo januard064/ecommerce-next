@@ -1,4 +1,4 @@
-import NavigationLayout from "../navigation-layout/navigation-layout"
+import Layout from "../Layout/layout"
 import InstagramLogo from "../icons/instagram-logo"
 import TwitterLogo from "../icons/twitter-logo"
 import LinkedInLogo from "../icons/linkedIn-logo"
@@ -95,7 +95,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <NavigationLayout>
+                <Layout>
                     <div className="h-[380px] relative">
                         <div className="flex py-[40px] w-9/12 relative">
                             <div className="w-1/3">
@@ -123,7 +123,7 @@ const Footer = () => {
 
                         </div>
                     </div>
-                </NavigationLayout>
+                </Layout>
             </footer>
         </>
     )

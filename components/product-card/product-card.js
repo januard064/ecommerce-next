@@ -42,7 +42,7 @@ const ProductCard = (props) => {
     const priceAfterDiscount = parseFloat(product.price) - parseFloat(saveAfterDiscount)
 
     return (
-        <div key={`product-${product.id}-${product.title}`} className="relative h-[315px] w-56 rounded-[16px] border border-[#EDEDED] text-black hover:border-[#008ECC] cursor-pointer hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)]">
+        <div key={`product-${product.id}-${product.title}`} className="relative h-[315px] w-[227px] rounded-[16px] border border-[#EDEDED] text-black hover:border-[#008ECC] cursor-pointer hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)]">
 
             {product.discountPercentage > 0 && (
                 <div className="absolute top-[-1px] right-[-1px] h-[53px] w-[51px] bg-[#008ECC] rounded-tr-2xl rounded-bl-2xl flex items-center flex-wrap justify-center text-white text-sm">
@@ -52,14 +52,12 @@ const ProductCard = (props) => {
                     </div>
                 </div>
             )}
-            {/* <div className="h-48 bg-[#F5F5F5] rounded-t-2xl "> */}
             <div className="h-48 flex justify-center items-center ">
                 <Image src={`${product.thumbnail}`} className="rounded-t-2xl" alt="product-iamge" style={{
                     width: '99%',
                     height: '99%',
                 }} width={220} height={160} />
             </div>
-            {/* </div> */}
             <div className="mt-[0.5px] pt-2 p-3 text-sm border-t border-[#EDEDEDs]">
                 <div style={{ fontFamily: 'Poppins-Light' }} className="h-10">
                     {productTitle(product.title)}

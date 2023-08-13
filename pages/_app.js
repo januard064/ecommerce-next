@@ -8,7 +8,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Navbar />
-      <Layout>
+      <Layout isBody={true}>
         <Component {...pageProps} />
       </Layout>
       <Footer />
