@@ -35,7 +35,7 @@ export async function getStaticProps() {
   const categoryArray = await getCategoryProducts()
   // convert array of category to insert custom image
   const productCategories = convertCategories(categoryArray)
-  const feturedCategory = productCategories.slice(0, 7)
+  const feturedCategory = productCategories.slice(10, 17)
 
   return {
     props: {

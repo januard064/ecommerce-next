@@ -8,15 +8,13 @@ const CategoryProductSection = (props) => {
 
     const { categories } = props
 
-    console.log('categories', categories)
-
     if (!categories) {
         return
     }
 
     return (
         <div className="mt-[120px]">
-            <TitleSeparator firstTitle={'Grab the best deal on'} secondTitle={'Smartphones'} />
+            <TitleSeparator firstTitle={'Shop from'} secondTitle={'Top Categories'} />
             <div className={`flex`}>
                 {categories.map((category, index) => (
                     <div key={`${category}-${index}`} className={`${index == 0 ? 'ml-0' : 'ml-[46px]'}`}>
