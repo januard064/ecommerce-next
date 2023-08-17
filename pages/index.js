@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { Inter } from 'next/font/google'
 import CarouselComponent from '@/components/carousel/carousel'
 import FeaturedProductSection from '@/components/home-page-section/featured-product-section'
@@ -12,11 +13,17 @@ export default function Home(props) {
 
   const { featuredProducts, categories } = props
 
+  const router = useRouter()
+
+  const goToProductsPage = () => {
+    router.push(`/products`)
+  }
+
   return (
     <>
       <CarouselComponent />
 
-      <FeaturedProductSection featuredProducts={featuredProducts} />
+      <FeaturedProductSection featuredProducts={featuredProducts} goToProductsPage={goToProductsPage} />
 
       <CategoryProductSection categories={categories} />
 

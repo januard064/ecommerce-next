@@ -9,7 +9,9 @@ export default function App({ Component, pageProps }) {
     <>
       <Navbar />
       <Layout isBody={true}>
-        <Component {...pageProps} />
+        <div className='min-h-[calc(100vh-610px)]'>
+          <Component {...pageProps} />
+        </div>
       </Layout>
       <Footer />
     </>
