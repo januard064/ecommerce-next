@@ -1,8 +1,11 @@
+import { useState, useEffect } from 'react'
 import useSWR from 'swr'
 
 import { getProducts } from "@/api-helpers/api-utils"
+
 import ProductCard from "@/components/product-card/product-card"
-import { useState, useEffect } from 'react'
+import ProductCardSkeleton from '@/components/skeleton/product-card-skeleton'
+
 
 const Products = (props) => {
 
@@ -42,7 +45,15 @@ const Products = (props) => {
                     <ProductCard product={product} />
                 ))}
             </div>
-            {isLoading && <div className='text-black'>fetching</div>}
+            {isLoading && (
+                <>
+                    <div class="grid grid-cols-5 gap-4">
+                        {[0, 1, 2, 3, 4].map((index) => (
+                            <ProductCardSkeleton index={index} />
+                        ))}
+                    </div>
+                </>
+            )}
 
             {!isLoading && stillMore &&
                 <div className='flex justify-center'>

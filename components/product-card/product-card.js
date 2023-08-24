@@ -82,7 +82,7 @@ const ProductCard = (props) => {
                     <div className="flex justify-between" style={{ fontFamily: 'Poppins-Light' }}>
                         <div className="flex justify-start items-center">
                             <p className="mr-1">{(product.rating).toFixed(1)}</p>
-                            <StarIcon />
+                            <StarIcon color={'#EDD146'} />
                         </div>
                         {product.discountPercentage > 0 && (
                             <p className="text-[#249B3E] text-xs">Save - {rupiahCurrency(saveAfterDiscount)}</p>
