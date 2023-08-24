@@ -110,7 +110,7 @@ const Footer = () => {
                         </div>
                         <div className="h-[48px] w-full absolute bottom-0 border-t-2 border-[#05ABF3] 
                                         flex justify-between items-center">
-                            <p style={{ justifyContent: 'Poppins-ExtraLight' }} className="text-[14px]">Copyright 2023 Next-Ecommerce</p>
+                            <p style={{ fontFamily: 'Poppins-ExtraLight' }} className="text-[14px]">Copyright 2023 Next-Ecommerce</p>
                             <div className="flex ">
                                 {socialMediaList.map((socmed) => (
                                     <div className="ml-4 cursor-pointer">
