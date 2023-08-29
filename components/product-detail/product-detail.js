@@ -10,10 +10,14 @@ import HalfStarIcon from "../icons/half-star-icon"
 // import ui component
 import QuantityChip from "./quantity-chip"
 import Button from "../ui-guide-component/button"
+import ArrowLeftCircle from "../icons/arrow-left-circle"
+import ArrowRightCircle from "../icons/arrow-right-circle"
 
 const ProductDetail = (props) => {
 
     const { product } = props
+
+    const allImagesRef = useRef()
 
     const saveAfterDiscount = discountTotal(product.discountPercentage, product.price)
     const priceAfterDiscount = parseFloat(product.price) - parseFloat(saveAfterDiscount)
@@ -75,6 +79,33 @@ const ProductDetail = (props) => {
         setMainImagePath(imgPath)
     }
 
+    const [isReachFirstImage, setIsReachFirstImage] = useState(true)
+    const [isReachLastImage, setIsReachLastImage] = useState(false)
+
+    const handleHorizantalScroll = (element, speed, distance, step) => {
+        let scrollAmount = 0;
+        const slideTimer = setInterval(() => {
+            element.scrollLeft += step;
+            scrollAmount += Math.abs(step);
+            if (scrollAmount >= distance) {
+                clearInterval(slideTimer);
+            }
+            if (element.scrollLeft === 0) {
+                setIsReachFirstImage(true)
+                setIsReachLastImage(false)
+            } else if (element.scrollLeft == element.scrollWidth - element.clientWidth) {
+                setIsReachFirstImage(false)
+                setIsReachLastImage(true)
+            } else {
+                setIsReachFirstImage(false)
+                setIsReachLastImage(false)
+            }
+            // console.log('scrollwidth', element.scrollWidth)
+            // console.log('clientWidth', element.clientWidth)
+            // console.log('elementLeft', element.scrollLeft)
+        }, speed);
+    };
+
     return (
         <div className="flex my-8">
             <div className="w-[40%] h-[485px]">
@@ -82,20 +113,43 @@ const ProductDetail = (props) => {
                     style={{ width: '100%', height: '100%' }}
                 />
 
-                <div className="flex justify-center mt-8">
-                    {product.images.map((img) => (
-                        <div className="flex justify-center items-center w-[110px] h-[110px]">
-                            <div
-                                className="w-[88px] h-[88px] flex justify-center items-center rounded-[8px] cursor-pointer border border-[#EDEDED] hover:border-[#008ECC] transition-all duration-300 hover:h-[110px] hover:w-[110px]"
-                                onClick={() => handleChangeMainProductImage(img)}
-                            >
-                                <Image src={`${img}`} width={88} height={88} alt="product-image-variant"
-                                    style={{ width: '95%', height: '95%' }}
-                                    className="rounded-[8px]"
-                                />
+                <div className="flex justify-center mt-8 items-center" >
+                    {!isReachFirstImage ?
+                        (<div className="flex justify-center items-center h-[88px] w-[24px] cursor-pointer"
+                            onClick={() => { handleHorizantalScroll(allImagesRef.current, 25, 100, -10) }}>
+                            <ArrowLeftCircle />
+                        </div>) : (
+                            <div className="h-[88px] w-[24px]" />
+                        )
+                    }
+
+                    <div className="flex overflow-hidden w-[350px]" ref={allImagesRef}>
+                        {product.images.map((img, index) => (
+                            <div className={index == 0 ? '' : 'ml-1'}>
+                                <div className="flex justify-center items-center w-[110px] h-[110px]">
+                                    <div
+                                        className="w-[88px] h-[88px] flex justify-center items-center rounded-[8px] cursor-pointer border border-[#EDEDED] hover:border-[#008ECC] transition-all duration-300 hover:h-[110px] hover:w-[110px]"
+                                        onClick={() => handleChangeMainProductImage(img)}
+                                    >
+                                        <Image src={`${img}`} width={88} height={88} alt="product-image-variant"
+                                            style={{ width: '95%', height: '95%' }}
+                                            className="rounded-[8px]"
+                                        />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+
+                    {!isReachLastImage ?
+                        (<div className="flex justify-center items-center h-[88px] w-[24px] cursor-pointer"
+                            onClick={() => { handleHorizantalScroll(allImagesRef.current, 25, 100, 10) }}>
+                            <ArrowRightCircle />
+                        </div>) : (
+                            <div className="h-[88px] w-[24px]" />
+                        )
+                    }
+
                 </div>
 
             </div>
