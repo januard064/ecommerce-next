@@ -17,7 +17,7 @@ const ProductCard = (props) => {
 
 
     const handleOpenProductDetail = (productId) => {
-        const routerPath = `products/${productId}`
+        const routerPath = `/products/${productId}`
 
         router.push(routerPath)
     }

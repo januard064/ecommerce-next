@@ -1,4 +1,7 @@
 import ProductDetail from "@/components/product-detail/product-detail"
+import TitleSeparator from "@/components/title-separator/title-separator"
+
+import ProductCardList from "@/components/product-card/product-card-list"
 
 const ProductDetails = (props) => {
 
@@ -9,6 +12,10 @@ const ProductDetails = (props) => {
     return (
         <div className="text-black">
             <ProductDetail product={props.product} />
+            <div className="mt-[80px]">
+                <TitleSeparator firstTitle={'Grab'} secondTitle={'Similar Products'} />
+                <ProductCardList products={props.similarProducts.products} />
+            </div>
         </div>
     )
 }
@@ -19,10 +26,14 @@ export async function getServerSideProps(context) {
 
     const { params } = context
 
-    const response = await fetch(`https://dummyjson.com/products/${params.productId}`)
-    const product = await response.json()
+    const productResponse = await fetch(`https://dummyjson.com/products/${params.productId}`)
+    const product = await productResponse.json()
 
-    if (response.status == '404') {
+    const similarProductsResponse = await fetch(`https://dummyjson.com/products/category/${product.category}`)
+    const similarProducts = await similarProductsResponse.json()
+
+    console.log('similarProducts', similarProducts)
+    if (productResponse.status == '404') {
         return {
             redirect: {
                 destination: '/'
@@ -33,6 +44,7 @@ export async function getServerSideProps(context) {
     return {
         props: {
             product: product,
+            similarProducts: similarProducts
         }
     }
 }

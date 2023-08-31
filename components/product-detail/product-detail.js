@@ -6,6 +6,7 @@ import { productTitle, discountDecimal, convertToRupiah, rupiahCurrency, discoun
 
 import StarIcon from "../icons/star-icon"
 import HalfStarIcon from "../icons/half-star-icon"
+import CartIcon from "../icons/cart-icon"
 
 // import ui component
 import QuantityChip from "./quantity-chip"
@@ -79,6 +80,7 @@ const ProductDetail = (props) => {
         setMainImagePath(imgPath)
     }
 
+    // all image
     const [isReachFirstImage, setIsReachFirstImage] = useState(true)
     const [isReachLastImage, setIsReachLastImage] = useState(false)
 
@@ -100,19 +102,19 @@ const ProductDetail = (props) => {
                 setIsReachFirstImage(false)
                 setIsReachLastImage(false)
             }
-            // console.log('scrollwidth', element.scrollWidth)
-            // console.log('clientWidth', element.clientWidth)
-            // console.log('elementLeft', element.scrollLeft)
         }, speed);
     };
 
     return (
         <div className="flex my-8">
-            <div className="w-[40%] h-[485px]">
-                <Image src={mainImagePath} width={424} height={590} alt="product-image-thumbnail"
-                    style={{ width: '100%', height: '100%' }}
-                />
-
+            <div className="w-[40%]">
+                <div className="h-[517px] border-2 border-[#EDEDED] flex justify-center items-center">
+                    <div className="w-[calc(100%-32px)] h-[485px]">
+                        <Image src={mainImagePath} width={424} height={590} alt="product-image-thumbnail"
+                            style={{ width: '100%', height: '100%' }}
+                        />
+                    </div>
+                </div>
                 <div className="flex justify-center mt-8 items-center" >
                     {!isReachFirstImage ?
                         (<div className="flex justify-center items-center h-[88px] w-[24px] cursor-pointer"
@@ -128,7 +130,10 @@ const ProductDetail = (props) => {
                             <div className={index == 0 ? '' : 'ml-1'}>
                                 <div className="flex justify-center items-center w-[110px] h-[110px]">
                                     <div
-                                        className="w-[88px] h-[88px] flex justify-center items-center rounded-[8px] cursor-pointer border border-[#EDEDED] hover:border-[#008ECC] transition-all duration-300 hover:h-[110px] hover:w-[110px]"
+                                        className={`w-[88px] h-[88px] flex justify-center items-center rounded-[8px] cursor-pointer border border-[#EDEDED] 
+                                        hover:border-[#008ECC] transition-all duration-300 hover:h-[110px] hover:w-[110px] 
+                                        ${img === mainImagePath ? 'h-[95px] w-[95px] border border-[#008ECD]' : ''}
+                                        `}
                                         onClick={() => handleChangeMainProductImage(img)}
                                     >
                                         <Image src={`${img}`} width={88} height={88} alt="product-image-variant"
@@ -206,12 +211,9 @@ const ProductDetail = (props) => {
                 </div>
 
                 <div className="grid grid-cols-4 text-[16px] mt-9 gap-x-2">
-                    <Button type={'primary'} text={'Add To Cart'} />
+                    <Button type={'primary'} text={'Add To Cart'} icon={<CartIcon style={{ stroke: '#FFFFFF', width: 20, height: 20 }} />} />
                     <Button type={''} text={'Shop Now'} />
                 </div>
-
-
-
             </div>
         </div>
     )
