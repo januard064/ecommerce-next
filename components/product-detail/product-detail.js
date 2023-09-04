@@ -80,6 +80,10 @@ const ProductDetail = (props) => {
         setMainImagePath(imgPath)
     }
 
+    useEffect(() => {
+        setMainImagePath(product.thumbnail)
+    }, [product])
+
     // all image
     const [isReachFirstImage, setIsReachFirstImage] = useState(true)
     const [isReachLastImage, setIsReachLastImage] = useState(false)
@@ -132,7 +136,7 @@ const ProductDetail = (props) => {
                                     <div
                                         className={`w-[88px] h-[88px] flex justify-center items-center rounded-[8px] cursor-pointer border border-[#EDEDED] 
                                         hover:border-[#008ECC] transition-all duration-300 hover:h-[110px] hover:w-[110px] 
-                                        ${img === mainImagePath ? 'h-[95px] w-[95px] border border-[#008ECD]' : ''}
+                                        ${img === mainImagePath ? 'h-[95px] w-[95px] border border-[#8A33FD]' : ''}
                                         `}
                                         onClick={() => handleChangeMainProductImage(img)}
                                     >
@@ -146,7 +150,7 @@ const ProductDetail = (props) => {
                         ))}
                     </div>
 
-                    {!isReachLastImage ?
+                    {!isReachLastImage && product.images.length > 1 ?
                         (<div className="flex justify-center items-center h-[88px] w-[24px] cursor-pointer"
                             onClick={() => { handleHorizantalScroll(allImagesRef.current, 25, 100, 10) }}>
                             <ArrowRightCircle />

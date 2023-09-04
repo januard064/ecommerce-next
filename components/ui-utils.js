@@ -33,3 +33,18 @@ export const discountTotal = (discount, price) => {
 export const decimalRatingDigit = (rating) => {
     return rating - Math.trunc(rating)
 }
+
+export const readableCategory = (title) => {
+    /**Remove character "-" to "space" */
+    const titleNoChar = title.replace("-", " ")
+
+    /**Capitalize each word in title */
+    let words = titleNoChar.split(" ");
+    for (let i = 0; i < words.length; i++) {
+        words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+    }
+    const readableTitle = words.join(" ");
+
+    return readableTitle
+
+}
