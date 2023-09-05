@@ -14,7 +14,7 @@ const CategoryProductSection = (props) => {
 
     return (
         <div className="mt-[120px]">
-            <TitleSeparator firstTitle={'Shop from'} secondTitle={'Top Categories'} />
+            <TitleSeparator firstTitle={'Shop from'} secondTitle={'Top Categories'} onClickViewAll={props.goToCategoriesPage} />
             <div className={`flex`}>
                 {categories.map((category, index) => (
                     <div key={`${category}-${index}`} className={`${index == 0 ? 'ml-0' : 'ml-[46px]'}`}>

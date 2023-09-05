@@ -120,7 +120,7 @@ const ProductDetail = (props) => {
                     </div>
                 </div>
                 <div className="flex justify-center mt-8 items-center" >
-                    {!isReachFirstImage ?
+                    {!isReachFirstImage && product.images.length > 3 ?
                         (<div className="flex justify-center items-center h-[88px] w-[24px] cursor-pointer"
                             onClick={() => { handleHorizantalScroll(allImagesRef.current, 25, 100, -10) }}>
                             <ArrowLeftCircle />
@@ -150,7 +150,7 @@ const ProductDetail = (props) => {
                         ))}
                     </div>
 
-                    {!isReachLastImage && product.images.length > 1 ?
+                    {!isReachLastImage && product.images.length > 3 ?
                         (<div className="flex justify-center items-center h-[88px] w-[24px] cursor-pointer"
                             onClick={() => { handleHorizantalScroll(allImagesRef.current, 25, 100, 10) }}>
                             <ArrowRightCircle />

@@ -19,15 +19,17 @@ export default function Home(props) {
     router.push(`/products`)
   }
 
+  const goToCategoriesPage = () => [
+    router.push(`/categories`)
+  ]
+
   return (
     <>
       <CarouselComponent />
 
       <FeaturedProductSection featuredProducts={featuredProducts} goToProductsPage={goToProductsPage} />
 
-      <CategoryProductSection categories={categories} />
-
-      <FeaturedProductSection />
+      <CategoryProductSection categories={categories} goToCategoriesPage={goToCategoriesPage} />
 
     </>
   )
