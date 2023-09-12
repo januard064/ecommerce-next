@@ -22,7 +22,7 @@ export const CART_PRODUCTS = [
         "id": 14,
         "title": "Non-Alcoholic Concentrated Perfume Oil",
         "description": "Original Al Munakh® by Mahal Al Musk | Our Impression of Climate | 6ml Non-Alcoholic Concentrated Perfume Oil",
-        "price": 120,
+        "price": 9220,
         "discountPercentage": 15.6,
         "rating": 4.21,
         "stock": 114,

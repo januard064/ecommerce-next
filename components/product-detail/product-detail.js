@@ -23,58 +23,12 @@ const ProductDetail = (props) => {
     const saveAfterDiscount = discountTotal(product.discountPercentage, product.price)
     const priceAfterDiscount = parseFloat(product.price) - parseFloat(saveAfterDiscount)
 
-    // quantity for checkout or shop
-    const [quantity, setQuantity] = useState(1)
-    const [enteredQuantity, setEnteredQuantity] = useState(1)
 
-    // reach max and min  quantity
-    const [reachMin, setReachMin] = useState(true)
-    const [reachMax, setReachMax] = useState(false)
 
     // display image state
     const [mainImagePath, setMainImagePath] = useState(product.thumbnail)
 
-    const addQuantity = () => {
-        if (quantity >= product.stock) {
-            setQuantity(product.stock)
-        } else {
-            setQuantity((prevQuantity) => prevQuantity + 1)
-        }
-    }
 
-    const minQuantity = () => {
-        if (quantity <= 1) {
-            setQuantity(1)
-        } else {
-            setQuantity((prevQuantity) => prevQuantity - 1)
-        }
-    }
-
-    const typeQuantity = (e) => {
-        setEnteredQuantity(e.target.value)
-    }
-
-    useEffect(() => {
-        if (enteredQuantity >= product.stock) {
-            setQuantity(product.stock)
-        } else if (enteredQuantity <= 0) {
-            setQuantity(1)
-        }
-        else {
-            setQuantity(parseFloat(enteredQuantity))
-        }
-    }, [enteredQuantity])
-
-    useEffect(() => {
-        if (quantity <= 1) {
-            setReachMin(true)
-        } else if (quantity >= product.stock) {
-            setReachMax(true)
-        } else {
-            setReachMax(false)
-            setReachMin(false)
-        }
-    }, [quantity])
 
     const handleChangeMainProductImage = (imgPath) => {
         setMainImagePath(imgPath)
@@ -209,7 +163,7 @@ const ProductDetail = (props) => {
                 <div className="flex items-center text-[16px]"
                     style={{ fontFamily: 'Poppins-Regular' }}
                 >
-                    <QuantityChip product={product} quantity={quantity} addQuantity={addQuantity} minQuantity={minQuantity} typeQuantity={typeQuantity} reachMax={reachMax} reachMin={reachMin} />
+                    <QuantityChip product={product} />
 
                     <p style={{ fontFamily: 'Poppins-Light' }} className="ml-5 text-[#807D7E]">Only <span className="text-[#8A33FD]"> {product.stock} left! </span> <br /> Don't miss it</p>
                 </div>
