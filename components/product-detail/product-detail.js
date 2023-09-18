@@ -1,5 +1,8 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useContext } from "react"
 import Image from "next/image"
+import { useRouter } from "next/router"
+
+import { ShoppingContext } from "@/store/shopping-context"
 
 // import ui-utils
 import { productTitle, discountDecimal, convertToRupiah, rupiahCurrency, discountTotal, decimalRatingDigit } from "../ui-utils"
@@ -16,7 +19,11 @@ import ArrowRightCircle from "../icons/arrow-right-circle"
 
 const ProductDetail = (props) => {
 
-    const { product } = props
+    const { shoppingCart, setShoppingCart } = useContext(ShoppingContext)
+
+    const router = useRouter()
+
+    const { product, initQuantity } = props
 
     const allImagesRef = useRef()
 
@@ -38,6 +45,11 @@ const ProductDetail = (props) => {
 
     useEffect(() => {
         setMainImagePath(product.thumbnail)
+
+        return (() => {
+            setQuantity(1)
+            console.log('pisah')
+        })
     }, [product])
 
     // all image
@@ -64,6 +76,22 @@ const ProductDetail = (props) => {
             }
         }, speed);
     };
+
+    const hanldeAddToCart = (prodId) => {
+
+        let existingInCart = shoppingCart.find((shop) => { return shop.productId === prodId })
+
+        if (existingInCart) {
+            console.log('product is exist in  cart and update total shop')
+            setShoppingCart(shoppingCart.map(exist => (exist.productId === prodId ? { productId: prodId, totalShop: quantity } : exist)))
+        } else {
+            setShoppingCart((prevState) => [...prevState, { productId: prodId, totalShop: quantity }])
+        }
+    }
+
+    const goToShoppingCart = () => {
+        router.push(`/shopping-cart`)
+    }
 
     return (
         <div className="flex my-8">
@@ -171,8 +199,8 @@ const ProductDetail = (props) => {
                 </div>
 
                 <div className="grid grid-cols-4 text-[16px] mt-9 gap-x-2">
-                    <Button type={'primary'} text={'Add To Cart'} icon={<CartIcon style={{ stroke: '#FFFFFF', width: 20, height: 20 }} />} />
-                    <Button type={''} text={'Shop Now'} />
+                    <Button onClick={() => hanldeAddToCart(product.id)} type={'primary'} text={'Add To Cart'} icon={<CartIcon style={{ stroke: '#FFFFFF', width: 20, height: 20 }} />} />
+                    <Button onClick={goToShoppingCart} type={''} text={'Shop Now'} />
                 </div>
             </div>
         </div>

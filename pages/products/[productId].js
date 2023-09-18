@@ -5,13 +5,13 @@ import ProductCardList from "@/components/product-card/product-card-list"
 
 const ProductDetails = (props) => {
 
-    if(!props.product){
+    if (!props.product) {
         return
     }
 
     return (
         <div className="text-black">
-            <ProductDetail product={props.product} />
+            <ProductDetail product={props.product} initQuantity={props.initQuantity} />
             <div className="mt-[80px]">
                 <TitleSeparator firstTitle={'Grab'} secondTitle={'Similar Products'} />
                 <ProductCardList products={props.similarProducts.products} />
@@ -32,6 +32,8 @@ export async function getServerSideProps(context) {
     const similarProductsResponse = await fetch(`https://dummyjson.com/products/category/${product.category}`)
     const similarProducts = await similarProductsResponse.json()
 
+    const initQuantity = 1
+
     console.log('similarProducts', similarProducts)
     if (productResponse.status == '404') {
         return {
@@ -44,7 +46,8 @@ export async function getServerSideProps(context) {
     return {
         props: {
             product: product,
-            similarProducts: similarProducts
+            similarProducts: similarProducts,
+            initQuantity: initQuantity
         }
     }
 }

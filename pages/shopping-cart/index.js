@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 
 import { CART_PRODUCTS } from "../dump-data"
 
@@ -10,7 +10,11 @@ import CartTableBody from "@/components/shopping-cart-component/cart-table-body"
 
 import OrderSummary from "@/components/shopping-cart-component/order-summary"
 
+import { ShoppingContext } from "@/store/shopping-context"
+
 const ShoppingCart = () => {
+
+    const { shoppingCart } = useContext(ShoppingContext)
 
     const TABLE_HEAD = [
         {
@@ -41,27 +45,27 @@ const ShoppingCart = () => {
 
 
     return (
-        <div className="text-black flex justify-between">
-            <div className="w-[76%]">
-                <div className="border-b-2 border-[#EDEDED] pb-3 mb-10 flex items-center">
+            <div className="text-black flex justify-between">
+                <div className="w-[76%]">
+                    <div className="border-b-2 border-[#EDEDED] pb-3 mb-10 flex items-center">
 
-                    {TABLE_HEAD.map((head) => (
-                        <CartTableHead width={head.width}>
-                            {head.title}
-                        </CartTableHead>
+                        {TABLE_HEAD.map((head) => (
+                            <CartTableHead width={head.width}>
+                                {head.title}
+                            </CartTableHead>
+                        ))}
+                    </div>
+
+                    {shoppingCart.map((cart) => (
+                        <CartTableBody cart={cart} setTotalOriginalPrice={setTotalOriginalPrice} setTotalDiscount={setTotalDiscount} setOrderTotalPrice={setOrderTotalPrice} />
                     ))}
                 </div>
 
-                {CART_PRODUCTS.map((cart) => (
-                    <CartTableBody cart={cart} setTotalOriginalPrice={setTotalOriginalPrice} setTotalDiscount={setTotalDiscount} setOrderTotalPrice={setOrderTotalPrice} />
-                ))}
-            </div>
+                <div className="w-[calc(24%-24px)]">
+                    <OrderSummary totalOriginalPrice={totalOriginalPrice} totalDiscount={totalDiscount} orderTotalPrice={orderTotalPrice} />
+                </div>
 
-            <div className="w-[calc(24%-24px)]">
-                <OrderSummary totalOriginalPrice={totalOriginalPrice} totalDiscount={totalDiscount} orderTotalPrice={orderTotalPrice} />
             </div>
-
-        </div>
     )
 }
 

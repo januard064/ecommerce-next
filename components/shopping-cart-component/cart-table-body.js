@@ -13,38 +13,56 @@ const CartTableBody = (props) => {
 
     const { cart, setTotalOriginalPrice, setTotalDiscount, setOrderTotalPrice } = props
 
+    // product in shopping cart
+    const [productInCart, setProductInCart] = useState([])
+
+    const [isLoading, setIsLoading] = useState(true)
+
     // quantity for checkout or shop
     const [quantity, setQuantity] = useState(1)
     const [enteredQuantity, setEnteredQuantity] = useState(1)
 
-    const saveAfterDiscount = discountTotal(cart.discountPercentage, cart.price)
-    const priceAfterDiscount = parseFloat(cart.price) - parseFloat(saveAfterDiscount)
+
 
     const [totalProductPrice, setTotalProductPrice] = useState(0)
 
     useEffect(() => {
+        setIsLoading(true)
+        fetch(`https://dummyjson.com/products/${cart.productId}`)
+            .then((response) => response.json())
+            .then((product) => {
+                console.log(product)
+                setProductInCart(product)
+                setIsLoading(false)
+            })
+    }, [])
+
+
+    const saveAfterDiscount = discountTotal(productInCart.discountPercentage, productInCart.price)
+    const priceAfterDiscount = parseFloat(productInCart.price) - parseFloat(saveAfterDiscount)
+
+    useEffect(() => {
         setTotalProductPrice(priceAfterDiscount * quantity)
         setTotalDiscount(saveAfterDiscount * quantity)
-        setTotalOriginalPrice(cart.price * quantity)
+        setTotalOriginalPrice(productInCart.price * quantity)
         console.log('total',)
-    }, [quantity])
+    }, [productInCart, quantity])
 
-    // useEffect(() => {
-    //     setTotalPrice(totalProductPrice)
-    //     setTotalDiscount(saveAfterDiscount)
-    //     // setOrderTotalPrice(totalProductPrice)
-    // }, [totalProductPrice])
+    if (isLoading) {
+        return
+    }
+
 
     return (
         <div className="flex mt-10 pb-10 border-b-2 border-[#EDEDED]">
 
             <div className="w-[32%] flex">
                 <CheckProudctTableBody />
-                <ProductDetailTableBody cart={cart} />
+                <ProductDetailTableBody cart={productInCart} />
             </div>
 
 
-            <PriceTableBody product={cart} priceAfterDiscount={priceAfterDiscount} saveAfterDiscount={saveAfterDiscount} />
+            <PriceTableBody product={productInCart} priceAfterDiscount={priceAfterDiscount} saveAfterDiscount={saveAfterDiscount} />
 
             <ProductQuantity quantity={quantity} setQuantity={setQuantity} enteredQuantity={enteredQuantity} setEnteredQuantity={setEnteredQuantity} product={cart} />
 
