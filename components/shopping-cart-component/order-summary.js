@@ -1,8 +1,9 @@
 import Button from "../ui-guide-component/button"
+import { rupiahCurrency } from "../ui-utils"
 
 const OrderSummary = (props) => {
 
-    const { totalPrice, totalDiscount } = props
+    const { totalOriginalPrice, totalDiscount, orderTotalPrice } = props
 
     return (
         <div className="w-[100%] border-2 border-[#EDEDED] p-3">
@@ -15,16 +16,16 @@ const OrderSummary = (props) => {
                         <p>Total Price </p>
                         <p>  (3 Items)  </p>
                     </div>
-                    <p>Rp 138.300.000</p>
+                    <p>{rupiahCurrency(totalOriginalPrice)}</p>
                 </div>
                 <div className="flex justify-between mt-2 items-end">
                     <p>Total <br /> Discount </p>
-                    <p>Rp 138.300.000</p>
+                    <p>-{rupiahCurrency(totalDiscount)}</p>
                 </div>
             </div>
             <div className="flex justify-between mt-6">
                 <p style={{ fontFamily: 'Poppins-SemiBold' }} >Total Price</p>
-                <p style={{ fontFamily: 'Poppins-Regular' }} className="text-sm">Rp 138.300.000</p>
+                <p style={{ fontFamily: 'Poppins-Regular' }} className="text-sm">{rupiahCurrency(orderTotalPrice)}</p>
             </div>
 
             <div className="flex justify-center mt-8">

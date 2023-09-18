@@ -2,10 +2,8 @@ import { rupiahCurrency, discountTotal, decimalRatingDigit, discountDecimal } fr
 
 const PriceTableBody = (props) => {
 
-    const { product } = props
+    const { product, priceAfterDiscount, saveAfterDiscount } = props
 
-    const saveAfterDiscount = discountTotal(product.discountPercentage, product.price)
-    const priceAfterDiscount = parseFloat(product.price) - parseFloat(saveAfterDiscount)
 
     return (
         <div className="w-[24%]">
@@ -24,6 +22,7 @@ const PriceTableBody = (props) => {
                             <p style={{ fontFamily: 'Poppins-SemiBold' }}>
                                 {rupiahCurrency(priceAfterDiscount)}
                             </p>
+                            <p>save- {rupiahCurrency(saveAfterDiscount)}</p>
                         </div>
                     ) : (
                         <p style={{ fontFamily: 'Poppins-Regular' }} className="mt-1">

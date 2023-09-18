@@ -1,14 +1,12 @@
+import { useState } from "react"
+
 import { CART_PRODUCTS } from "../dump-data"
 
 import { rupiahCurrency, discountTotal, decimalRatingDigit, discountDecimal } from "@/components/ui-utils"
 
 import CartTableHead from "@/components/shopping-cart-component/cart-table-head"
-import CheckProudctTableBody from "@/components/shopping-cart-component/check-proudct-table-body"
-import ProductDetailTableBody from "@/components/shopping-cart-component/product-detail-table-body"
-import PriceTableBody from "@/components/shopping-cart-component/price-table-body"
-import ProductQuantity from "@/components/shopping-cart-component/product-quantity"
-import CartAction from "@/components/shopping-cart-component/cart-action"
-import TotalPriceTableBody from "@/components/shopping-cart-component/total-price-table-body"
+
+import CartTableBody from "@/components/shopping-cart-component/cart-table-body"
 
 import OrderSummary from "@/components/shopping-cart-component/order-summary"
 
@@ -37,6 +35,10 @@ const ShoppingCart = () => {
         }
     ]
 
+    const [totalOriginalPrice, setTotalOriginalPrice] = useState(0)
+    const [totalDiscount, setTotalDiscount] = useState(0)
+    const [orderTotalPrice, setOrderTotalPrice] = useState(0)
+
 
     return (
         <div className="text-black flex justify-between">
@@ -51,28 +53,12 @@ const ShoppingCart = () => {
                 </div>
 
                 {CART_PRODUCTS.map((cart) => (
-                    <div className="flex mt-10 pb-10 border-b-2 border-[#EDEDED]">
-
-                        <div className="w-[32%] flex">
-                            <CheckProudctTableBody />
-                            <ProductDetailTableBody cart={cart} />
-                        </div>
-
-
-                        <PriceTableBody product={cart} />
-
-                        <ProductQuantity product={cart} />
-
-                        <TotalPriceTableBody product={cart} />
-
-                        <CartAction />
-
-                    </div>
+                    <CartTableBody cart={cart} setTotalOriginalPrice={setTotalOriginalPrice} setTotalDiscount={setTotalDiscount} setOrderTotalPrice={setOrderTotalPrice} />
                 ))}
             </div>
 
             <div className="w-[calc(24%-24px)]">
-                <OrderSummary />
+                <OrderSummary totalOriginalPrice={totalOriginalPrice} totalDiscount={totalDiscount} orderTotalPrice={orderTotalPrice} />
             </div>
 
         </div>

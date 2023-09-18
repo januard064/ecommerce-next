@@ -5,11 +5,11 @@ import MinusIcon from "../icons/minus-icon"
 
 const QuantityChip = (props) => {
 
-    const { product, cart } = props
+    const { quantity, setQuantity, enteredQuantity, setEnteredQuantity, product, cart } = props
 
-    // quantity for checkout or shop
-    const [quantity, setQuantity] = useState(1)
-    const [enteredQuantity, setEnteredQuantity] = useState(1)
+    // // quantity for checkout or shop
+    // const [quantity, setQuantity] = useState(1)
+    // const [enteredQuantity, setEnteredQuantity] = useState(1)
 
     // reach max and min  quantity
     const [reachMin, setReachMin] = useState(true)

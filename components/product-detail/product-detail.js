@@ -28,7 +28,9 @@ const ProductDetail = (props) => {
     // display image state
     const [mainImagePath, setMainImagePath] = useState(product.thumbnail)
 
-
+    // quantity for checkout or shop
+    const [quantity, setQuantity] = useState(1)
+    const [enteredQuantity, setEnteredQuantity] = useState(1)
 
     const handleChangeMainProductImage = (imgPath) => {
         setMainImagePath(imgPath)
@@ -163,7 +165,7 @@ const ProductDetail = (props) => {
                 <div className="flex items-center text-[16px]"
                     style={{ fontFamily: 'Poppins-Regular' }}
                 >
-                    <QuantityChip product={product} />
+                    <QuantityChip quantity={quantity} setQuantity={setQuantity} enteredQuantity={enteredQuantity} setEnteredQuantity={setEnteredQuantity} product={product} />
 
                     <p style={{ fontFamily: 'Poppins-Light' }} className="ml-5 text-[#807D7E]">Only <span className="text-[#8A33FD]"> {product.stock} left! </span> <br /> Don't miss it</p>
                 </div>

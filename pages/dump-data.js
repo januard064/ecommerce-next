@@ -37,3 +37,12 @@ export const CART_PRODUCTS = [
         ]
     },
 ]
+
+/**TODO */
+
+/**
+ * struktur cart_products : {quantity, productId }
+ * sementara di localstorage dulu
+ * masing-masing product -> setQuantity->setLocalStorage
+ * OrderSummary => useEffect paramter [quanitity], setiap ada perubahan quanitity, tarik data(sementara localstorage) dan count total
+ */
