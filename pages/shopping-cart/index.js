@@ -39,33 +39,31 @@ const ShoppingCart = () => {
         }
     ]
 
-    const [totalOriginalPrice, setTotalOriginalPrice] = useState(0)
-    const [totalDiscount, setTotalDiscount] = useState(0)
-    const [orderTotalPrice, setOrderTotalPrice] = useState(0)
+
 
 
     return (
-            <div className="text-black flex justify-between">
-                <div className="w-[76%]">
-                    <div className="border-b-2 border-[#EDEDED] pb-3 mb-10 flex items-center">
+        <div className="text-black flex justify-between">
+            <div className="w-[76%]">
+                <div className="border-b-2 border-[#EDEDED] pb-3 mb-10 flex items-center">
 
-                        {TABLE_HEAD.map((head) => (
-                            <CartTableHead width={head.width}>
-                                {head.title}
-                            </CartTableHead>
-                        ))}
-                    </div>
-
-                    {shoppingCart.map((cart) => (
-                        <CartTableBody cart={cart} setTotalOriginalPrice={setTotalOriginalPrice} setTotalDiscount={setTotalDiscount} setOrderTotalPrice={setOrderTotalPrice} />
+                    {TABLE_HEAD.map((head) => (
+                        <CartTableHead width={head.width}>
+                            {head.title}
+                        </CartTableHead>
                     ))}
                 </div>
 
-                <div className="w-[calc(24%-24px)]">
-                    <OrderSummary totalOriginalPrice={totalOriginalPrice} totalDiscount={totalDiscount} orderTotalPrice={orderTotalPrice} />
-                </div>
-
+                {shoppingCart.map((cart) => (
+                    <CartTableBody cart={cart} />
+                ))}
             </div>
+
+            <div className="w-[calc(24%-24px)]">
+                <OrderSummary />
+            </div>
+
+        </div>
     )
 }
 

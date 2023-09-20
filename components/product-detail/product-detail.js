@@ -5,8 +5,9 @@ import { useRouter } from "next/router"
 import { ShoppingContext } from "@/store/shopping-context"
 
 // import ui-utils
-import { productTitle, discountDecimal, convertToRupiah, rupiahCurrency, discountTotal, decimalRatingDigit } from "../ui-utils"
+import { rupiahCurrency, discountTotal, decimalRatingDigit } from "../ui-utils"
 
+// import icon
 import StarIcon from "../icons/star-icon"
 import HalfStarIcon from "../icons/half-star-icon"
 import CartIcon from "../icons/cart-icon"
@@ -16,6 +17,9 @@ import QuantityChip from "./quantity-chip"
 import Button from "../ui-guide-component/button"
 import ArrowLeftCircle from "../icons/arrow-left-circle"
 import ArrowRightCircle from "../icons/arrow-right-circle"
+
+// import const
+import { ROUTER_CONST } from "@/Consants/RouterConst"
 
 const ProductDetail = (props) => {
 
@@ -85,12 +89,12 @@ const ProductDetail = (props) => {
             console.log('product is exist in  cart and update total shop')
             setShoppingCart(shoppingCart.map(exist => (exist.productId === prodId ? { productId: prodId, totalShop: quantity } : exist)))
         } else {
-            setShoppingCart((prevState) => [...prevState, { productId: prodId, totalShop: quantity }])
+            setShoppingCart((prevState) => [...prevState, { id: shoppingCart.length, productId: prodId, totalShop: quantity }])
         }
     }
 
     const goToShoppingCart = () => {
-        router.push(`/shopping-cart`)
+        router.push(ROUTER_CONST.shoppingCart)
     }
 
     return (
