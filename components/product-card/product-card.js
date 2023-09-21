@@ -43,7 +43,7 @@ const ProductCard = (props) => {
                     height: '99%',
                 }} width={220} height={160} />
             </div>
-            <div className="mt-[0.5px] pt-2 p-3 text-sm border-t border-[#EDEDEDs]">
+            <div className="mt-[0.5px] pt-2 p-3 text-sm border-t border-[#EDEDED]">
                 <div style={{ fontFamily: 'Poppins-Light' }} className="h-10">
                     {productTitle(product.title)}
                 </div>
