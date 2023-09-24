@@ -166,7 +166,7 @@ const ProductDetail = (props) => {
 
                 </div>
                 <div className="ml-9 w-[60%]">
-                    <div className="p-2 bg-[#F0F2F2] w-fit mb-1">
+                    <div className="p-2 bg-[#F0F2F2] w-fit mb-1 rounded-md">
                         <p> {product.brand}</p>
                     </div>
                     <p className="text-3xl mb-2" style={{ fontFamily: 'Poppins-SemiBold' }}>{product.title}</p>

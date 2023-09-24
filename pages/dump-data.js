@@ -1,3 +1,8 @@
+import CheckoutTransaction from "@/data-connector/classes/checkout-product"
+import CHECKOUT_STATUS from "@/data-connector/constants/checkout-constants"
+import moment from "moment"
+
+
 export const CART_PRODUCTS = [
     {
         "id": 1,
@@ -46,3 +51,38 @@ export const CART_PRODUCTS = [
  * masing-masing product -> setQuantity->setLocalStorage
  * OrderSummary => useEffect paramter [quanitity], setiap ada perubahan quanitity, tarik data(sementara localstorage) dan count total
  */
+
+
+export const getDumpTransaction = () => {
+
+    const checkoutTransaction = new CheckoutTransaction(0)
+
+    checkoutTransaction.checkoutTime = moment('2023-09-23T08:00:00+07:00')
+    checkoutTransaction.checkoutStatus = CHECKOUT_STATUS.NEW
+    checkoutTransaction.paidTime = moment('2023-09-23T10:00:00+07:00')
+    checkoutTransaction.shippingStart = moment('2023-09-24T10:00:00+07:00')
+    checkoutTransaction.eta = moment('2023-09-25T10:00:00+07:00')
+    checkoutTransaction.shippingEnd = moment('2023-09-25T10:00:00+07:00')
+    checkoutTransaction.address = ''
+    checkoutTransaction.paymentMethod = ''
+
+    checkoutTransaction.items = [
+        {
+            shoppingCartId: 1,
+            productId: 1,
+            totalShop: 2,
+            price: 100,
+            discount: 10,
+        },
+        {
+            shoppingCartId: 1,
+            productId: 2,
+            totalShop: 2,
+            price: 100,
+            discount: 10,
+        }
+    ]
+
+    return checkoutTransaction
+
+}

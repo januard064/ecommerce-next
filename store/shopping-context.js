@@ -37,6 +37,24 @@ export function ShoppingContextProvider(props) {
         // }
     ])
 
+    const [checkoutTransaction, setCheckoutTransaction] = useState([
+        {
+            id: '0',
+            checkoutTime: '',
+            checkoutStatus: '',
+            paidTime: '',
+            items: [
+                {
+                    shoppingCartId: 1,
+                    productId: 1,
+                    totalShop: 2,
+                    price: 100,
+                    discount: 10,
+                }
+            ],
+        }
+    ])
+
     const shoppingContextValue = {
         shoppingCart,
         setShoppingCart,

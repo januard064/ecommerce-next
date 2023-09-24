@@ -18,7 +18,7 @@ const ProductCategory = (props) => {
             className="w-[132px] group"
             onClick={() => goToProductsPage(category.title)}
         >
-            <div className="h-[132px] w-[132px] bg-[#F5F5F5] rounded-full flex justify-center items-center hover:border-[#008ECC] cursor-pointer border hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)]">
+            <div className="h-[132px] w-[132px] bg-[#F6F6F6] rounded-full flex justify-center items-center hover:border-[#008ECC] cursor-pointer border hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)]">
                 <Image key={`${category.title}`} src={`${category.imagePath}?v=100`} width={120} height={120} alt="category-product-images"
                     className="w-[75%] group-hover:w-[85%] transition-all duration-700"
                 />
