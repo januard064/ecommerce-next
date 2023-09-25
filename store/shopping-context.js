@@ -59,19 +59,21 @@ export function ShoppingContextProvider(props) {
         shoppingCart,
         setShoppingCart,
         checkOutProduct,
-        setCheckOutProduct
+        setCheckOutProduct,
+        checkoutTransaction,
+        setCheckoutTransaction
 
     }
 
+    // useEffect(() => {
+
+    //     console.log('shopping-cart', shoppingCart)
+    // }, [shoppingCart])
+
     useEffect(() => {
 
-        console.log('shopping-cart', shoppingCart)
-    }, [shoppingCart])
-
-    useEffect(() => {
-
-        console.log('checkout', checkOutProduct)
-    }, [checkOutProduct])
+        console.log('checkoutTransaction', checkoutTransaction)
+    }, [checkoutTransaction])
 
     return (
         <ShoppingContext.Provider value={shoppingContextValue}>

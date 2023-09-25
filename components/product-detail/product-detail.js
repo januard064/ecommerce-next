@@ -65,7 +65,7 @@ const ProductDetail = (props) => {
 
         return (() => {
             setQuantity(1)
-            console.log('pisah')
+            // console.log('pisah')
         })
     }, [product])
 

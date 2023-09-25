@@ -34,7 +34,7 @@ export async function getServerSideProps(context) {
 
     const initQuantity = 1
 
-    console.log('similarProducts', similarProducts)
+    // console.log('similarProducts', similarProducts)
     if (productResponse.status == '404') {
         return {
             redirect: {

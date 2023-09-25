@@ -3,12 +3,19 @@ import { useContext, useEffect, useState } from "react"
 import Button from "../ui-guide-component/button"
 import { rupiahCurrency } from "../ui-utils"
 
+import moment from "moment"
+import CHECKOUT_STATUS from "@/data-connector/constants/checkout-constants"
+
 import { ShoppingContext } from "@/store/shopping-context"
+
+import CheckoutTransaction from "@/data-connector/classes/checkout-product"
 
 const OrderSummary = (props) => {
 
 
-    const { checkOutProduct } = useContext(ShoppingContext)
+    // const { checkOutProduct } = useContext(ShoppingContext)
+    const { checkOutProduct } = props
+    const { checkoutTransaction, setCheckoutTransaction } = useContext(ShoppingContext)
 
     const [checkoutOrigialPrice, setCheckoutOriginalPrice] = useState(0)
     const [checkOutDiscount, setCheckoutDiscout] = useState(0)
@@ -19,24 +26,48 @@ const OrderSummary = (props) => {
         let sumOriginalPrice = 0
         let sumDiscount = 0
 
-        if(checkOutProduct.length > 0){
+        if (checkOutProduct.length > 0) {
             checkOutProduct.forEach(checkedProd => {
 
-                sumOriginalPrice+=checkedProd.price
-                sumDiscount+=checkedProd.discount
-    
+                sumOriginalPrice += checkedProd.price
+                sumDiscount += checkedProd.discount
+
                 setCheckoutOriginalPrice(sumOriginalPrice)
                 setCheckoutDiscout(sumDiscount)
             });
-        } else{
+        } else {
             setCheckoutOriginalPrice(0)
             setCheckoutDiscout(0)
         }
 
-      
+
     }, [checkOutProduct])
 
     const orderedTotalPrice = checkoutOrigialPrice - checkOutDiscount
+
+
+    const checkoutNow = () => {
+
+        const newTransaction = new CheckoutTransaction(checkoutTransaction.length)
+
+        newTransaction.checkoutTime = moment('2023-09-23T08:00:00+07:00')
+        newTransaction.checkoutStatus = CHECKOUT_STATUS.NEW
+        newTransaction.paidTime = moment('2023-09-23T10:00:00+07:00')
+        newTransaction.shippingStart = moment('2023-09-24T10:00:00+07:00')
+        newTransaction.eta = moment('2023-09-25T10:00:00+07:00')
+        newTransaction.shippingEnd = moment('2023-09-25T10:00:00+07:00')
+        newTransaction.address = ''
+        newTransaction.paymentMethod = ''
+
+        newTransaction.items = checkoutTransaction
+
+        setCheckoutTransaction((prevState) => ([...prevState, newTransaction]))
+
+
+
+    }
+
+
 
     return (
         <div className="w-[100%] border-2 border-[#EDEDED] p-3">
@@ -62,7 +93,7 @@ const OrderSummary = (props) => {
             </div>
 
             <div className="flex justify-center mt-8">
-                <Button type={'primary'} text={'Shop Now'} />
+                <Button type={'primary'} text={'Shop Now'} onClick={checkoutNow} />
             </div>
 
         </div>

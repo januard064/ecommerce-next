@@ -21,7 +21,7 @@ const Products = (props) => {
 
     useEffect(() => {
         loadMoreProducts()
-        console.log('products', products)
+        // console.log('products', products)
     }, [])
 
     // fetch data and load more functionality

@@ -14,7 +14,7 @@ import { ShoppingContext } from "@/store/shopping-context"
 
 const ShoppingCart = () => {
 
-    const { shoppingCart } = useContext(ShoppingContext)
+    const { shoppingCart, checkoutTransaction, setCheckoutTransaction } = useContext(ShoppingContext)
 
     const TABLE_HEAD = [
         {
@@ -39,6 +39,7 @@ const ShoppingCart = () => {
         }
     ]
 
+    const [checkOutProduct, setCheckOutProduct] = useState([])
 
 
 
@@ -55,12 +56,12 @@ const ShoppingCart = () => {
                 </div>
 
                 {shoppingCart.map((cart) => (
-                    <CartTableBody cart={cart} />
+                    <CartTableBody checkOutProduct={checkOutProduct} setCheckOutProduct={setCheckOutProduct} cart={cart} />
                 ))}
             </div>
 
             <div className="w-[calc(24%-24px)]">
-                <OrderSummary />
+                <OrderSummary checkOutProduct={checkOutProduct} checkoutTransaction={checkoutTransaction} setCheckoutTransaction={setCheckoutTransaction} />
             </div>
 
         </div>

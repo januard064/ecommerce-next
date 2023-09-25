@@ -13,9 +13,9 @@ import { rupiahCurrency, discountTotal, decimalRatingDigit, discountDecimal } fr
 
 const CartTableBody = (props) => {
 
-    const { cart } = props
+    const { checkOutProduct, setCheckOutProduct, cart } = props
 
-    const { checkOutProduct, setCheckOutProduct } = useContext(ShoppingContext)
+    // const { checkOutProduct, setCheckOutProduct } = useContext(ShoppingContext)
 
     // product in shopping cart
     const [productInCart, setProductInCart] = useState([])
@@ -41,7 +41,7 @@ const CartTableBody = (props) => {
         fetch(`https://dummyjson.com/products/${cart.productId}`)
             .then((response) => response.json())
             .then((product) => {
-                console.log(product)
+                // console.log(product)
                 setProductInCart(product)
                 setIsLoading(false)
             })
@@ -55,18 +55,22 @@ const CartTableBody = (props) => {
         setTotalProductPrice(priceAfterDiscount * quantity)
         setTotalDiscount(saveAfterDiscount * quantity)
         setTotalOriginalPrice(productInCart.price * quantity)
-        console.log('total', cart.totalShop)
+        // console.log('total', cart.totalShop)
 
-        console.log('totalProductPrice', priceAfterDiscount * quantity)
-        console.log('TotalOriginalPrice', productInCart.price * quantity)
+        // console.log('totalProductPrice', priceAfterDiscount * quantity)
+        // console.log('TotalOriginalPrice', productInCart.price * quantity)
     }, [productInCart, quantity])
 
 
     useEffect(() => {
-        const checked = checkOutProduct.some((checked) => checked.shoppingCartId == cart.id)
+            const checked = checkOutProduct.some((checked) => checked.shoppingCartId == cart.id)
 
-        setIsChecked(checked)
+            setIsChecked(checked)
     }, [checkOutProduct])
+
+    // useEffect(() => {
+    //     console.log('checkit', checkOutProduct)
+    // }, [checkOutProduct])
 
 
     const productReadyToChecked = {
@@ -102,7 +106,7 @@ const CartTableBody = (props) => {
     return (
         <div className="flex mt-10 pb-10 border-b-2 border-[#EDEDED]">
 
-            <div className="w-[32%] flex" onClick={() => console.log(rupiahCurrency(totalProductPrice))}>
+            <div className="w-[32%] flex" >
                 <CheckProudctTableBody isChecked={isChecked} handleCheckOutCart={handleCheckOutCart} />
                 <ProductDetailTableBody cart={productInCart} />
             </div>
