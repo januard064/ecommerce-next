@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 
+import { useRouter } from "next/router"
+
 import Button from "../ui-guide-component/button"
 import { rupiahCurrency } from "../ui-utils"
 
@@ -10,8 +12,11 @@ import { ShoppingContext } from "@/store/shopping-context"
 
 import CheckoutTransaction from "@/data-connector/classes/checkout-product"
 
+import { ROUTER_CONST } from "@/Consants/RouterConst"
+
 const OrderSummary = (props) => {
 
+    const router = useRouter()
 
     // const { checkOutProduct } = useContext(ShoppingContext)
     const { checkOutProduct } = props
@@ -50,6 +55,8 @@ const OrderSummary = (props) => {
 
         const newTransaction = new CheckoutTransaction(checkoutTransaction.length)
 
+        newTransaction.id = checkoutTransaction.length + 1
+
         newTransaction.checkoutTime = moment('2023-09-23T08:00:00+07:00')
         newTransaction.checkoutStatus = CHECKOUT_STATUS.NEW
         newTransaction.paidTime = moment('2023-09-23T10:00:00+07:00')
@@ -59,11 +66,11 @@ const OrderSummary = (props) => {
         newTransaction.address = ''
         newTransaction.paymentMethod = ''
 
-        newTransaction.items = checkoutTransaction
+        newTransaction.items = checkOutProduct
 
         setCheckoutTransaction((prevState) => ([...prevState, newTransaction]))
 
-
+        router.push(`${ROUTER_CONST.checkoutTransaction}/${newTransaction.id}`)
 
     }
 

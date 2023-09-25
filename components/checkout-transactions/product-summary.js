@@ -4,11 +4,14 @@ import Image from "next/image"
 
 import { FONT_FAMILY } from "@/Consants/FontFamily"
 
+import { rupiahCurrency } from "../ui-utils"
+
 const ProductSummary = (props) => {
 
-    const [product, setProduct] = useState()
+    const { checkoutedProduct, setCheckoutOriginalPrice } = props
 
-    const { checkoutedProduct } = props
+
+    const [product, setProduct] = useState()
 
     useEffect(() => {
         fetch(`https://dummyjson.com/products/${checkoutedProduct.productId}`)
@@ -42,7 +45,7 @@ const ProductSummary = (props) => {
                         <div className={`p-1 px-3 bg-[#F0F2F2] w-fit mb-1 rounded-md`}>
                             <p>{product.brand}</p>
                         </div>
-                        <p>{product.price}</p>
+                        <p>{rupiahCurrency(product.price)}</p>
                     </div>
                 </div>
             </div>
