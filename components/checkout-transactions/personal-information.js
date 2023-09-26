@@ -4,108 +4,90 @@ import InputForm from "../ui-guide-component/form"
 import TextArea from "../ui-guide-component/text-area"
 import Button from "../ui-guide-component/button"
 
+import WarningForm from "../ui-guide-component/warning-form"
+
 const PersonalInformation = (props) => {
 
-    const { shippingAdress, setShippingAddress } = props
-
-    const firstNameRef = useRef()
-    const lastNameRef = useRef()
-    const phoneRef = useRef()
-    const addressLabelRef = useRef()
-    const cityRef = useRef()
-    const postCodeRef = useRef()
-    const addressRef = useRef()
+    const { shippingAdress, setShippingAddress, transaction, setTransaction } = props
 
     const [isAddressComplete, setIsAddressComplete] = useState(false)
 
+    const initValue = {
+        firstName: "",
+        lastName: "",
+        phone: "",
+        addressLabel: "",
+        city: "",
+        postCode: "",
+        address: ""
+    }
 
-    const toDelivery = (e) => {
-        e.preventDefault()
+    const [tempAddress, setTempAddress] = useState(initValue)
+
+
+    const toDelivery = () => {
         const paymentElement = document.getElementById("shipping-address")
         paymentElement.scrollIntoView({ behavior: "smooth" })
     }
 
 
+    const handleChange = (event) => {
+        event.preventDefault()
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+        const { name, value } = event.target
 
-
-        const firstName = firstNameRef.current?.value
-        const lastName = lastNameRef.current?.value
-        const phone = phoneRef.current?.value
-        const addressLabel = addressLabelRef.current?.value
-        const city = cityRef.current?.value
-        const postCode = postCodeRef.current?.value
-        const address = addressRef.current?.value
-
-
-        // if(firstName  && )
-
-        const tempPersonalInformation = {
-            firstName,
-            lastName,
-            phone,
-            addressLabel,
-            city,
-            postCode,
-            address
-        }
-        // shippingAdress.firstName = firstName
-        // shippingAdress.lastName = lastName
-        // shippingAdress.phone = phone
-        // shippingAdress.addressLabel = addressLabel
-        // shippingAdress.city = city
-        // shippingAdress.postCode = postCode
-        // shippingAdress.address = address
-
-        if (firstName && lastName && phone && addressLabel && city && postCode && address) {
-            console.log(shippingAdress)
-            setShippingAddress(tempPersonalInformation)
-            toDelivery(e)
-
-            setIsAddressComplete(true)
-        } else {
-            console.log('no data')
-            setIsAddressComplete(false)
-        }
-
+        setTempAddress({
+            ...tempAddress,
+            [name]: value
+        })
 
     }
 
+    const handleSubmitAddress = () => {
+        setShippingAddress(tempAddress)
+
+        if (Object.values(tempAddress).every(value => value !== "")) {
+            console.log('true')
+            toDelivery()
+            setTempAddress(initValue)
+            setTransaction({
+                ...transaction,
+                address: tempAddress
+            })
+
+        }
+    }
+
+    useEffect(() => {
+        console.log('tempaddress', tempAddress.lastName)
+    }, [tempAddress])
 
     return (
         <>
             <div>
-                <form autocomplete="off" onSubmit={handleSubmit}  >
-                    <div className={`grid grid-cols-2 gap-4`}>
-                        {/* <input ref={firstNameRef} /> */}
-                        <InputForm id={"first-name"} label={"First Name"} placeholder={"First Name"} isRequired ref={firstNameRef} />
-                        { !shippingAdress.firstName && (<p className="text-black">input</p>)}
+                <div className={`grid grid-cols-2 gap-4`}>
+                    <InputForm id={"first-name"} value={tempAddress.firstName} name="firstName" label={"First Name"} placeholder={"First Name"} isRequired onChange={handleChange} warningEmpty={shippingAdress.firstName == ""} />
+                    <InputForm id={"last-name"} value={tempAddress.lastName} name="lastName" label={"Last Name"} placeholder={"Last Name"} isRequired onChange={handleChange} warningEmpty={shippingAdress.lastName == ""} />
+                </div>
 
-                        <InputForm id={"last-name"} label={"Last Name"} placeholder={"Last Name"} isRequired ref={lastNameRef} />
-                    </div>
-                    <div className={`grid grid-cols-2 gap-4 mt-6`}>
-                        <InputForm id={"phone"} label={"Phone"} placeholder={"Phone"} isRequired ref={phoneRef} />
-                        <InputForm id={"address-label"} label={"Adress Label"} placeholder={"Kantor/Rumah/Apartemen"} ref={addressLabelRef} />
-                    </div>
-                    <div className={`grid grid-cols-2 gap-4 mt-6`}>
-                        <InputForm id={"city"} label={"City"} placeholder={"City"} isRequired ref={cityRef} />
-                        <InputForm id={"post-code"} label={"Post Code"} placeholder={"Post Code"} isRequired ref={postCodeRef} />
-                    </div>
-                    <div className={`mt-6`}>
-                        <TextArea id={"address"} label={"Address"} placeholder={"Address"} isRequired ref={addressRef} />
-                    </div>
+                <div className={`grid grid-cols-2 gap-4 mt-2`}>
+                    <InputForm id={"phone"} value={tempAddress.phone} name="phone" label={"Phone"} placeholder={"Phone"} isRequired onChange={handleChange} warningEmpty={shippingAdress.phone == ""} />
+                    <InputForm id={"address-label"} value={tempAddress.addressLabel} name="addressLabel" label={"Adress Label"} placeholder={"Kantor/Rumah/Apartemen"} isRequired onChange={handleChange} warningEmpty={shippingAdress.addressLabel == ""} />
+                </div>
+                <div className={`grid grid-cols-2 gap-4 mt-2`}>
+                    <InputForm id={"city"} value={tempAddress.city} name="city" label={"City"} placeholder={"City"} isRequired onChange={handleChange} warningEmpty={shippingAdress.city == ""} />
+                    <InputForm id={"post-code"} value={tempAddress.postCode} name="postCode" label={"Post Code"} placeholder={"Post Code"} isRequired onChange={handleChange} warningEmpty={shippingAdress.postCode == ""} />
+                </div>
+                <div className={`mt-2`}>
+                    <TextArea id={"address"} value={tempAddress.address} name="address" label={"Address"} placeholder={"Address"} isRequired onChange={handleChange} warningEmpty={shippingAdress.address == ""} />
+                </div>
 
-                    <div className={`flex items-center justify-end mt-6`}>
-                        {/* <div className="text-black mr-4">
+                <div className={`flex items-center justify-end mt-2`}>
+                    {/* <div className="text-black mr-4">
                         Save Address 
                     </div> */}
-                        <button type="" className="text-black">
-                            <div> <Button type={"primary"} text={"Continue to Delivery"} /></div>
-                        </button>
-                    </div>
-                </form>
+                    <Button type={"primary"} text={"Continue to Delivery"} onClick={handleSubmitAddress} />
+                </div>
             </div>
         </>
     )

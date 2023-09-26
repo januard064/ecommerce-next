@@ -42,7 +42,10 @@ export function ShoppingContextProvider(props) {
             id: '0',
             checkoutTime: '',
             checkoutStatus: '',
+            paymentMethod: '',
             paidTime: '',
+            address: '',
+            deliveryCharges: 3,
             items: [
                 {
                     shoppingCartId: 1,

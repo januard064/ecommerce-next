@@ -57,14 +57,14 @@ const OrderSummary = (props) => {
 
         newTransaction.id = checkoutTransaction.length + 1
 
-        newTransaction.checkoutTime = moment('2023-09-23T08:00:00+07:00')
-        newTransaction.checkoutStatus = CHECKOUT_STATUS.NEW
-        newTransaction.paidTime = moment('2023-09-23T10:00:00+07:00')
-        newTransaction.shippingStart = moment('2023-09-24T10:00:00+07:00')
-        newTransaction.eta = moment('2023-09-25T10:00:00+07:00')
-        newTransaction.shippingEnd = moment('2023-09-25T10:00:00+07:00')
-        newTransaction.address = ''
-        newTransaction.paymentMethod = ''
+        // newTransaction.checkoutTime = moment('2023-09-23T08:00:00+07:00')
+        // newTransaction.checkoutStatus = CHECKOUT_STATUS.NEW
+        // newTransaction.paidTime = moment('2023-09-23T10:00:00+07:00')
+        // newTransaction.shippingStart = moment('2023-09-24T10:00:00+07:00')
+        // newTransaction.eta = moment('2023-09-25T10:00:00+07:00')
+        // newTransaction.shippingEnd = moment('2023-09-25T10:00:00+07:00')
+        // newTransaction.address = ''
+        // newTransaction.paymentMethod = ''
 
         newTransaction.items = checkOutProduct
 
