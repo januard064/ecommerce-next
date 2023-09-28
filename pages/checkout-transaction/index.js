@@ -25,13 +25,10 @@ import addedToCartAnimation from "../../public/animations/checkout-success"
 
 import { Player } from "@lottiefiles/react-lottie-player"
 
-import { getDumpTransaction } from "../dump-data"
 
 const CheckoutTransactions = (props) => {
 
     const router = useRouter()
-
-    const checkoutedDatas = getDumpTransaction()
 
     const { checkoutTransaction, setCheckoutTransaction, ordersHistory, setOrdersHistory, routerPath } = useContext(ShoppingContext)
 
