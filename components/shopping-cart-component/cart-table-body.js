@@ -114,7 +114,7 @@ const CartTableBody = (props) => {
 
             <PriceTableBody product={productInCart} priceAfterDiscount={priceAfterDiscount} saveAfterDiscount={saveAfterDiscount} />
 
-            <ProductQuantity quantity={quantity} setQuantity={setQuantity} enteredQuantity={enteredQuantity} setEnteredQuantity={setEnteredQuantity} product={cart} />
+            <ProductQuantity quantity={quantity} setQuantity={setQuantity} enteredQuantity={enteredQuantity} setEnteredQuantity={setEnteredQuantity} product={cart} isChecked={isChecked}  />
 
             <TotalPriceTableBody totalProductPrice={totalProductPrice} />
 

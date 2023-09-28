@@ -249,6 +249,7 @@ const ProductDetail = (props) => {
             <ModalDialog
                 isOpen={isOpenCheckoutModal} onClose={hanldeOpenCheckoutModal}
                 title={""}
+                primaryActionText={`See Cart`}
                 handlePrimaryAction={goToShoppingCart}
                 body={
                     <div className="">

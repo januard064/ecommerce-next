@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { Inter } from 'next/font/google'
-import CarouselComponent from '@/components/carousel/carousel'
+import AdvertisementCarousel from '@/components/carousel/carousel'
 import FeaturedProductSection from '@/components/home-page-section/featured-product-section'
 import CategoryProductSection from '@/components/home-page-section/category-product-section'
 import { getFeaturedProducts, getProducts, getCategoryProducts } from '@/api-helpers/api-utils'
@@ -30,7 +30,7 @@ export default function Home(props) {
       <Head>
         <meta name="description" content="Submit message and send your contact" />
       </Head>
-      <CarouselComponent />
+      <AdvertisementCarousel />
 
       <FeaturedProductSection featuredProducts={featuredProducts} goToProductsPage={goToProductsPage} />
 
