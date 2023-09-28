@@ -41,7 +41,8 @@ const PersonalInformation = (props) => {
 
     }
 
-    const handleSubmitAddress = () => {
+    const handleSubmitAddress = (e) => {
+        e.preventDefault()
         setShippingAddress(tempAddress)
 
         if (Object.values(tempAddress).every(value => value !== "")) {

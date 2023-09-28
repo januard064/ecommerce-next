@@ -12,6 +12,7 @@ const menuItems = [
     {
         icon: <UserIcon />,
         text: 'Sign Up/Sign In',
+        path: ROUTER_CONST.home
     },
     {
         icon: <CartIcon />,

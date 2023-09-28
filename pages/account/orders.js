@@ -3,14 +3,14 @@ import { useEffect, useState, useContext } from "react"
 import { ShoppingContext } from "@/store/shopping-context"
 
 import CHECKOUT_STATUS from "@/data-connector/constants/checkout-constants"
+import { OrdersPageRoute } from "@/Consants/RouterConst"
 
 import SubtitleSeparator from "@/components/ui-guide-component/subtitle-separator"
 import TabPanel from "@/components/ui-guide-component/tab-panel"
 import OrderDescription from "@/components/orders/order-description"
-
-
 import OrderSummary from "@/components/checkout-transactions/order-summary"
 import Button from "@/components/ui-guide-component/button"
+import BreadCrumb from "@/components/ui-guide-component/breadcrumb"
 
 
 const ORDER_CATEGORY = [
@@ -33,7 +33,7 @@ const ORDER_CATEGORY = [
 
 const Orders = () => {
 
-    const { ordersHistory } = useContext(ShoppingContext)
+    const { ordersHistory, routerPath } = useContext(ShoppingContext)
 
     const [orderCategory, setOrderCategory] = useState(0)
 
@@ -72,11 +72,17 @@ const Orders = () => {
         console.log('filtered', filteredOrderbyCategory)
     }, [orderCategory])
 
+    useEffect(() => {
+        /**BreadCrumb Path */
+        OrdersPageRoute.disable = true
+        routerPath.push(OrdersPageRoute)
 
+    }, [])
 
 
     return (
         <div>
+            <BreadCrumb />
             <SubtitleSeparator title={'My Orders'} />
             <div className={`mt-10`}>
                 <TabPanel tabMenu={ORDER_CATEGORY} openTab={orderCategory} handleOpenTab={handleOpenOrderCategory} />

@@ -1,14 +1,14 @@
 import { useEffect, useContext, useState } from "react"
 
 import { useRouter } from "next/router"
-import { COLOR } from "@/Consants/Color"
 
 import moment from "moment"
 
+import { ShoppingContext } from "@/store/shopping-context"
+
 import CHECKOUT_STATUS from "@/data-connector/constants/checkout-constants"
 import { ROUTER_CONST } from "@/Consants/RouterConst"
-
-import { ShoppingContext } from "@/store/shopping-context"
+import { CheckouPageRoute } from "@/Consants/RouterConst"
 
 import PersonalInformation from "@/components/checkout-transactions/personal-information"
 import PaymentMethod from "@/components/checkout-transactions/payment-method"
@@ -18,6 +18,7 @@ import ShippingAddress from "@/components/checkout-transactions/shipping-address
 import ShippingMethod from "@/components/checkout-transactions/shipping-method"
 import ModalDialog from "@/components/ui-guide-component/modal-dialog"
 import Button from "@/components/ui-guide-component/button"
+import BreadCrumb from "@/components/ui-guide-component/breadcrumb"
 
 import addedToCartAnimation from "../../public/animations/checkout-success"
 
@@ -31,7 +32,7 @@ const CheckoutTransactions = (props) => {
 
     const checkoutedDatas = getDumpTransaction()
 
-    const { checkoutTransaction, setCheckoutTransaction, ordersHistory, setOrdersHistory, } = useContext(ShoppingContext)
+    const { checkoutTransaction, setCheckoutTransaction, ordersHistory, setOrdersHistory, routerPath } = useContext(ShoppingContext)
 
 
     const [isOrderModalOpen, setIsOrderModalOpen] = useState(false)
@@ -84,12 +85,20 @@ const CheckoutTransactions = (props) => {
 
     }
 
+    // useEffect(() => {
+    //     /**BreadCrumb Path */
+    //     CheckouPageRoute.disable = true
+    //     routerPath.push(CheckouPageRoute)
+    // }, [])
+
+
     if (!checkoutTransaction) {
         return
     }
 
     return (
         <>
+            {/* <BreadCrumb /> */}
             <div className={`relative`}>
                 <div className={`grid grid-cols-12 gap-4 relative`}>
                     <div className={`col-span-7`}>
@@ -133,7 +142,7 @@ const CheckoutTransactions = (props) => {
                             style={{ height: '300px', width: '100%' }}
                         />
                         <div className="flex justify-center ">
-                            <p style={{ fontFamily: 'Poppins-Regular' }} className="text-black"> Please do payment before <br/> {moment(checkoutTransaction.checkoutTime).add(2, 'hours').format('DD MMMM YYYY, h:mm a')} </p>
+                            <p style={{ fontFamily: 'Poppins-Regular' }} className="text-black"> Please do payment before <br /> {moment(checkoutTransaction.checkoutTime).add(2, 'hours').format('DD MMMM YYYY, h:mm a')} </p>
                         </div>
                     </div>
                 }

@@ -1,13 +1,22 @@
-import { useState, useEffect } from 'react'
-import useSWR from 'swr'
+import { useState, useEffect, useContext } from 'react'
 
-import { getProducts } from "@/api-helpers/api-utils"
+import { ShoppingContext } from '@/store/shopping-context'
 
 import ProductCard from "@/components/product-card/product-card"
 import ProductCardSkeleton from '@/components/skeleton/product-card-skeleton'
 
+import BreadCrumb from '@/components/ui-guide-component/breadcrumb'
+
+import { ProductsPageRoute } from '@/Consants/RouterConst'
+
 
 const Products = (props) => {
+
+    const { routerPath } = useContext(ShoppingContext)
+
+
+
+
 
     // all products state
     const [products, setProducts] = useState([])
@@ -21,7 +30,11 @@ const Products = (props) => {
 
     useEffect(() => {
         loadMoreProducts()
-        // console.log('products', products)
+
+        /**BreadCrumb Path */
+        ProductsPageRoute.disable = true
+        routerPath.push(ProductsPageRoute)
+      
     }, [])
 
     // fetch data and load more functionality
@@ -40,6 +53,7 @@ const Products = (props) => {
 
     return (
         <>
+            <BreadCrumb />
             <div class="grid grid-cols-5 gap-4">
                 {products.map((product, index) => (
                     <ProductCard product={product} />

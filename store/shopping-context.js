@@ -3,6 +3,7 @@ import { createContext, useState, useEffect } from "react";
 import moment from "moment";
 
 import CHECKOUT_STATUS from "@/data-connector/constants/checkout-constants";
+import { ROUTER_CONST } from "@/Consants/RouterConst";
 
 export const ShoppingContext = createContext({})
 
@@ -106,6 +107,14 @@ export function ShoppingContextProvider(props) {
         }
     ])
 
+
+    const routerPath = [
+        {
+            text: 'Home',
+            path: ROUTER_CONST.home
+        }
+    ]
+
     const shoppingContextValue = {
         shoppingCart,
         setShoppingCart,
@@ -114,9 +123,11 @@ export function ShoppingContextProvider(props) {
         checkoutTransaction,
         setCheckoutTransaction,
         ordersHistory,
-        setOrdersHistory
+        setOrdersHistory,
+        routerPath
 
     }
+
 
     // useEffect(() => {
 
