@@ -55,7 +55,9 @@ const ModalDialog = (props) => {
                                     </div>
 
                                     <div className="mt-10 flex justify-end gap-x-3">
-                                        <Button onClick={handlePrimaryAction} type={'primary'} text={primaryActionText ? primaryActionText : 'See Cart'} />
+                                        {primaryActionText && (
+                                            <Button onClick={handlePrimaryAction} type={'primary'} text={primaryActionText ? primaryActionText : 'See Cart'} />
+                                        )}
                                         <Button onClick={onClose} type={''} text={'OK'} />
                                     </div>
                                 </Dialog.Panel>

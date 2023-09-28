@@ -80,6 +80,7 @@ const CheckoutTransactions = (props) => {
 
     const handleOpenOrderModal = () => {
         setIsOrderModalOpen(!isOrderModalOpen)
+        goToOrdersPage()
     }
 
     useEffect(() => {
@@ -144,8 +145,8 @@ const CheckoutTransactions = (props) => {
             <ModalDialog
                 isOpen={isOrderModalOpen} onClose={handleOpenOrderModal}
                 title={""}
-                primaryActionText={`View Orders`}
-                handlePrimaryAction={goToOrdersPage}
+                // primaryActionText={`View Orders`}
+                // handlePrimaryAction={goToOrdersPage}
                 body={
                     <div>
                         <Player
