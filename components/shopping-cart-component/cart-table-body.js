@@ -77,8 +77,8 @@ const CartTableBody = (props) => {
         shoppingCartId: cart.id,
         productId: cart.productId,
         totalShop: quantity,
-        price: totalOriginalPrice,
-        discount: totalDiscount,
+        totalPrice: totalOriginalPrice,
+        totalDiscount: totalDiscount,
     }
 
     const handleCheckOutCart = (e) => {

@@ -6,9 +6,23 @@ import { FONT_FAMILY } from "@/Consants/FontFamily"
 
 import { rupiahCurrency } from "../ui-utils"
 
+import Button from "../ui-guide-component/button"
+
+const DescriptionTable = (props) => {
+
+    const { head, body } = props
+
+    return (
+        <div className={`flex items-center text-sm text-black mt-1`}>
+            <p style={{ fontFamily: FONT_FAMILY.POPPINS_SEMIBOLD }} >{head}</p>  &nbsp;:&nbsp;
+            <p style={{ fontFamily: FONT_FAMILY.POPPINS_REGULAR }} className={``}>{body}</p>
+        </div>
+    )
+}
+
 const ProductSummary = (props) => {
 
-    const { checkoutedProduct, setCheckoutOriginalPrice } = props
+    const { checkoutedProduct, isInOrderHistory } = props
 
 
     const [product, setProduct] = useState()
@@ -23,6 +37,31 @@ const ProductSummary = (props) => {
 
     if (!product) {
         return
+    }
+
+
+    if (isInOrderHistory) {
+        return (
+            <div className={`my-4 flex w-fit items-center justify-between`}>
+                <div className={`h-[106px] w-[106px]`}>
+                    <Image src={product.thumbnail} className="rounded-md" alt="product-iamge"
+                        style={{
+                            width: '99%',
+                            height: '99%',
+                        }} width={220} height={160}
+                    />
+                </div>
+                <div className={`ml-6`}>
+                    <p style={{ fontFamily: FONT_FAMILY.POPPINS_SEMIBOLD }} className="">{product.title}</p>
+                    <div className={`p-1 px-3 bg-[#F0F2F2] w-fit mb-1 rounded-md mt-1`}>
+                        <p>{product.brand}</p>
+                    </div>
+                    <DescriptionTable head={`Quality`} body={checkoutedProduct.totalShop} />
+                    <DescriptionTable head={`Total`} body={rupiahCurrency(checkoutedProduct.totalPrice - checkoutedProduct.totalDiscount)} />
+                </div>
+            </div>
+
+        )
     }
 
     return (

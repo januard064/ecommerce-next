@@ -8,7 +8,7 @@ import { rupiahCurrency } from "../ui-utils"
 
 const OrderSummary = (props) => {
 
-    const { checkoutedDatas } = props
+    const { checkoutedDatas, isInOrderHistory=false } = props
 
 
     const [checkoutOrigialPrice, setCheckoutOriginalPrice] = useState(0)
@@ -23,8 +23,8 @@ const OrderSummary = (props) => {
         if (checkoutedDatas.items.length > 0) {
             checkoutedDatas.items.forEach(checkedProd => {
 
-                sumOriginalPrice += checkedProd.price
-                sumDiscount += checkedProd.discount
+                sumOriginalPrice += checkedProd.totalPrice
+                sumDiscount += checkedProd.totalDiscount
 
                 setCheckoutOriginalPrice(sumOriginalPrice)
                 setCheckoutDiscout(sumDiscount)
@@ -39,6 +39,16 @@ const OrderSummary = (props) => {
     }, [checkoutedDatas])
 
     let totalCost = ((checkoutOrigialPrice - checkOutDiscount) + checkoutedDatas.deliveryCharges)
+
+    if (isInOrderHistory) {
+        return (
+            <div className={`text-black text-sm`}>
+                {checkoutedDatas.items.map((checkoutedProduct) => (
+                    <ProductSummary checkoutedDatas={checkoutedDatas} checkoutedProduct={checkoutedProduct} isInOrderHistory={isInOrderHistory} />
+                ))}
+            </div>
+        )
+    }
 
     return (
         <div className={`col-span-5 w-[100%] h-fit border-2 border-[${COLOR.GREEN[0]}] p-4 sticky top-[110px] text-black text-sm`}>

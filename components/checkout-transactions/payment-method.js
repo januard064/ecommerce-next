@@ -7,17 +7,13 @@ import { PAYMENT_METHOD } from '@/data-connector/payment-tenant'
 
 const PaymentMethod = (props) => {
 
-    const { transaction, setTransaction } = props
+    const { paymentMethod, setPaymentMethod } = props
 
-    const [paymentMethod, setPaymentMethod] = useState()
+    // const [paymentMethod, setPaymentMethod] = useState()
 
     const handleSetPaymentMethod = (id) => {
         setPaymentMethod(id)
 
-        setTransaction({
-            ...transaction,
-            paymentMethod: id
-        })
     }
 
 

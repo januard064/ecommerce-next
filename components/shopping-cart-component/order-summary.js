@@ -34,8 +34,8 @@ const OrderSummary = (props) => {
         if (checkOutProduct.length > 0) {
             checkOutProduct.forEach(checkedProd => {
 
-                sumOriginalPrice += checkedProd.price
-                sumDiscount += checkedProd.discount
+                sumOriginalPrice += checkedProd.totalPrice
+                sumDiscount += checkedProd.totalDiscount
 
                 setCheckoutOriginalPrice(sumOriginalPrice)
                 setCheckoutDiscout(sumDiscount)
@@ -53,24 +53,15 @@ const OrderSummary = (props) => {
 
     const checkoutNow = () => {
 
-        const newTransaction = new CheckoutTransaction(checkoutTransaction.length)
+        const newTransaction = new CheckoutTransaction()
 
-        newTransaction.id = checkoutTransaction.length + 1
-
-        // newTransaction.checkoutTime = moment('2023-09-23T08:00:00+07:00')
-        // newTransaction.checkoutStatus = CHECKOUT_STATUS.NEW
-        // newTransaction.paidTime = moment('2023-09-23T10:00:00+07:00')
-        // newTransaction.shippingStart = moment('2023-09-24T10:00:00+07:00')
-        // newTransaction.eta = moment('2023-09-25T10:00:00+07:00')
-        // newTransaction.shippingEnd = moment('2023-09-25T10:00:00+07:00')
-        // newTransaction.address = ''
-        // newTransaction.paymentMethod = ''
+        // newTransaction.id = checkoutTransaction.length + 1
 
         newTransaction.items = checkOutProduct
 
-        setCheckoutTransaction((prevState) => ([...prevState, newTransaction]))
+        setCheckoutTransaction(newTransaction)
 
-        router.push(`${ROUTER_CONST.checkoutTransaction}/${newTransaction.id}`)
+        router.push(ROUTER_CONST.checkoutTransaction)
 
     }
 

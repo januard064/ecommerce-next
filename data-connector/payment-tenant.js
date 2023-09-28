@@ -42,3 +42,10 @@ export const PAYMENT_METHOD = [
         va: '1935345-1235345'
     }
 ]
+
+export const getTenantPayment = (tenantId) => {
+
+    const paymentTenant = PAYMENT_METHOD.find((tenant) => tenant.id == tenantId)
+
+    return paymentTenant
+}

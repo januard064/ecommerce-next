@@ -8,7 +8,7 @@ import Button from './button'
 
 const ModalDialog = (props) => {
 
-    const { isOpen, onClose, title, body, handlePrimaryAction } = props
+    const { isOpen, onClose, title, primaryActionText, body, handlePrimaryAction } = props
 
     return (
         <>
@@ -55,7 +55,7 @@ const ModalDialog = (props) => {
                                     </div>
 
                                     <div className="mt-10 flex justify-end gap-x-3">
-                                        <Button onClick={handlePrimaryAction} type={'primary'} text={'See Cart'} />
+                                        <Button onClick={handlePrimaryAction} type={'primary'} text={primaryActionText ? primaryActionText : 'See Cart'} />
                                         <Button onClick={onClose} type={''} text={'OK'} />
                                     </div>
                                 </Dialog.Panel>

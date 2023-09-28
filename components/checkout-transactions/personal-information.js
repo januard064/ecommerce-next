@@ -8,9 +8,7 @@ import WarningForm from "../ui-guide-component/warning-form"
 
 const PersonalInformation = (props) => {
 
-    const { shippingAdress, setShippingAddress, transaction, setTransaction } = props
-
-    const [isAddressComplete, setIsAddressComplete] = useState(false)
+    const { shippingAdress, setShippingAddress } = props
 
     const initValue = {
         firstName: "",
@@ -50,10 +48,10 @@ const PersonalInformation = (props) => {
             console.log('true')
             toDelivery()
             setTempAddress(initValue)
-            setTransaction({
-                ...transaction,
-                address: tempAddress
-            })
+            // setTransaction({
+            //     ...transaction,
+            //     address: tempAddress
+            // })
 
         }
     }
