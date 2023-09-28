@@ -4,6 +4,8 @@ import { useRouter } from "next/router"
 
 import { ShoppingContext } from "@/store/shopping-context"
 
+import CheckoutTransaction from "@/data-connector/classes/checkout-product"
+
 // import ui-utils
 import { rupiahCurrency, discountTotal, decimalRatingDigit } from "../ui-utils"
 
@@ -29,7 +31,7 @@ import { ROUTER_CONST } from "@/Consants/RouterConst"
 
 const ProductDetail = (props) => {
 
-    const { shoppingCart, setShoppingCart } = useContext(ShoppingContext)
+    const { shoppingCart, setShoppingCart, setCheckoutTransaction, ordersHistory } = useContext(ShoppingContext)
 
     const router = useRouter()
 
@@ -109,6 +111,26 @@ const ProductDetail = (props) => {
 
     const goToShoppingCart = () => {
         router.push(ROUTER_CONST.shoppingCart)
+    }
+
+    const shopNow = () => {
+
+        const newTransaction = new CheckoutTransaction(ordersHistory.length)
+
+        newTransaction.items = [
+            {
+                shoppingCartId: null,
+                productId: product.id,
+                totalShop: quantity,
+                totalPrice: product.price * quantity,
+                totalDiscount: saveAfterDiscount * quantity,
+            }
+        ]
+
+        setCheckoutTransaction(newTransaction)
+
+        router.push(ROUTER_CONST.checkoutTransaction)
+
     }
 
     return (
@@ -219,7 +241,7 @@ const ProductDetail = (props) => {
 
                     <div className="flex text-[16px] mt-9 gap-x-3">
                         <Button onClick={() => hanldeAddToCart(product.id)} type={'primary'} text={'Add To Cart'} icon={<CartIcon style={{ stroke: '#FFFFFF', width: 20, height: 20 }} />} />
-                        <Button onClick={goToShoppingCart} type={''} text={'Shop Now'} />
+                        <Button onClick={shopNow} type={''} text={'Shop Now'} />
                     </div>
                 </div>
             </div>

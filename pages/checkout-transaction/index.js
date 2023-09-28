@@ -19,6 +19,7 @@ import ShippingMethod from "@/components/checkout-transactions/shipping-method"
 import ModalDialog from "@/components/ui-guide-component/modal-dialog"
 import Button from "@/components/ui-guide-component/button"
 import BreadCrumb from "@/components/ui-guide-component/breadcrumb"
+import WarningForm from "@/components/ui-guide-component/warning-form"
 
 import addedToCartAnimation from "../../public/animations/checkout-success"
 
@@ -51,19 +52,30 @@ const CheckoutTransactions = (props) => {
 
     const [paymentMethod, setPaymentMethod] = useState()
 
+    const [isWarningPayment, setIsWarningPayment] = useState(false)
+
+    const [totalBill, setTotalBill] = useState()
+
     const buyNow = () => {
-        setCheckoutTransaction({
-            ...checkoutTransaction,
-            id: ordersHistory.length,
-            checkoutTime: moment(),
-            checkoutStatus: CHECKOUT_STATUS.NEW,
-            paidTime: null,
-            shippingStart: null,
-            estimatedDeliveryDate: moment().add('days', 1),
-            shippingEnd: null,
-            paymentMethod: paymentMethod,
-            address: shippingAdress
-        })
+
+        if (paymentMethod) {
+            setIsWarningPayment(false)
+            setCheckoutTransaction({
+                ...checkoutTransaction,
+                id: ordersHistory.length,
+                checkoutTime: moment(),
+                checkoutStatus: CHECKOUT_STATUS.NEW,
+                paidTime: null,
+                shippingStart: null,
+                estimatedDeliveryDate: moment().add('days', 1),
+                shippingEnd: null,
+                paymentMethod: paymentMethod,
+                address: shippingAdress,
+                totalBill: totalBill
+            })
+        } else {
+            setIsWarningPayment(true)
+        }
     }
 
     const handleOpenOrderModal = () => {
@@ -116,13 +128,14 @@ const CheckoutTransactions = (props) => {
                         </div>
                         <div id={"payment-method"} className={`mt-10 scroll-mt-[110px]`}>
                             <SubtitleSeparator title={"Payment Method"} />
+                            {isWarningPayment && <WarningForm inputLabel={`Please choose payment method`} warningEmpty={isWarningPayment} />}
                             <PaymentMethod paymentMethod={paymentMethod} setPaymentMethod={setPaymentMethod} />
                         </div>
                         <div className={`flex justify-end mt-6`}>
                             <Button type={"primary"} text={"Buy Now"} onClick={buyNow} />
                         </div>
                     </div>
-                    {checkoutTransaction && (<OrderSummary checkoutedDatas={checkoutTransaction} />)}
+                    {checkoutTransaction && (<OrderSummary checkoutedDatas={checkoutTransaction} totalBill={totalBill} setTotalBill={setTotalBill} />)}
                     {/* <OrderSummary checkoutedDatas={checkoutedDatas} /> */}
                 </div>
 

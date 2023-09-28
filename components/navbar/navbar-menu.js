@@ -11,8 +11,8 @@ import { ROUTER_CONST } from "@/Consants/RouterConst"
 const menuItems = [
     {
         icon: <UserIcon />,
-        text: 'Sign Up/Sign In',
-        path: ROUTER_CONST.home
+        text: 'Account',
+        path: ROUTER_CONST.orders
     },
     {
         icon: <CartIcon />,

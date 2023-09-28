@@ -8,7 +8,7 @@ import { rupiahCurrency } from "../ui-utils"
 
 const OrderSummary = (props) => {
 
-    const { checkoutedDatas, isInOrderHistory=false } = props
+    const { checkoutedDatas, isInOrderHistory = false, totalBill, setTotalBill } = props
 
 
     const [checkoutOrigialPrice, setCheckoutOriginalPrice] = useState(0)
@@ -38,7 +38,16 @@ const OrderSummary = (props) => {
 
     }, [checkoutedDatas])
 
-    let totalCost = ((checkoutOrigialPrice - checkOutDiscount) + checkoutedDatas.deliveryCharges)
+    useEffect(() => {
+        if (!isInOrderHistory) {
+            let totalCost = ((checkoutOrigialPrice - checkOutDiscount) + checkoutedDatas.deliveryCharges)
+
+            setTotalBill(totalCost)
+        }
+
+
+    }, [checkOutDiscount, checkoutOrigialPrice])
+
 
     if (isInOrderHistory) {
         return (
@@ -77,7 +86,7 @@ const OrderSummary = (props) => {
             <div style={{ fontFamily: FONT_FAMILY.POPPINS_SEMIBOLD }}>
                 <div className={`flex justify-between my-4`}>
                     <p>{`Total`}</p>
-                    <p>{rupiahCurrency(totalCost)}</p>
+                    <p>{rupiahCurrency(totalBill)}</p>
                 </div>
             </div>
         </div>

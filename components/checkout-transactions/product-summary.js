@@ -22,7 +22,7 @@ const DescriptionTable = (props) => {
 
 const ProductSummary = (props) => {
 
-    const { checkoutedProduct, isInOrderHistory } = props
+    const { checkoutedDatas, checkoutedProduct, isInOrderHistory } = props
 
 
     const [product, setProduct] = useState()

@@ -6,6 +6,8 @@ import moment from "moment"
 import { getTenantPayment } from "@/data-connector/payment-tenant"
 import { getCheckoutStatusText } from "@/data-connector/constants/checkout-constants"
 
+import { rupiahCurrency } from "../ui-utils"
+
 const DescriptionTable = (props) => {
 
     const { head, body } = props
@@ -42,6 +44,10 @@ const OrderDescription = (props) => {
                         <div>
                             <DescriptionTable head={'Order Status'} body={getCheckoutStatusText(order.checkoutStatus)} />
                             <DescriptionTable head={'Payment Method'} body={getTenantPayment(order.paymentMethod).name} />
+                        </div>
+
+                        <div className="full flex items-center">
+                            <DescriptionTable head={'Total'} body={rupiahCurrency(order.totalBill)} />
                         </div>
                     </div>
                 </div>

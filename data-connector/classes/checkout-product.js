@@ -9,7 +9,8 @@ class CheckoutTransaction {
             this.shippingStart = '',
             this.shippingEnd = '',
             this.deliveryCharges = 3,
-            this.estimatedDeliveryDate = ''
+            this.estimatedDeliveryDate = '',
+            this.totalBill = ''
         this.items = []
     }
 }

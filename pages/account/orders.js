@@ -72,17 +72,17 @@ const Orders = () => {
         console.log('filtered', filteredOrderbyCategory)
     }, [orderCategory])
 
-    useEffect(() => {
-        /**BreadCrumb Path */
-        OrdersPageRoute.disable = true
-        routerPath.push(OrdersPageRoute)
+    // useEffect(() => {
+    //     /**BreadCrumb Path */
+    //     OrdersPageRoute.disable = true
+    //     routerPath.push(OrdersPageRoute)
 
-    }, [])
+    // }, [])
 
 
     return (
         <div>
-            <BreadCrumb />
+            {/* <BreadCrumb /> */}
             <SubtitleSeparator title={'My Orders'} />
             <div className={`mt-10`}>
                 <TabPanel tabMenu={ORDER_CATEGORY} openTab={orderCategory} handleOpenTab={handleOpenOrderCategory} />
@@ -91,7 +91,7 @@ const Orders = () => {
                 {orders.length > 0 ? (
                     <div className={""}>
                         {orders.map((order, index) => (
-                            <div className={` ${index == 0 ? '' : `border-b-2 border-[#EDEDED]`}  pb-10`}>
+                            <div className={` ${`border-b-2 border-[#EDEDED]`}  pb-10`}>
                                 <OrderDescription order={order} />
                                 <div className={`flex justify-between`}>
                                     <OrderSummary checkoutedDatas={order} isInOrderHistory={true} />
