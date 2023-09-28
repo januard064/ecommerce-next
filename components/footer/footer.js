@@ -1,8 +1,12 @@
+import Image from "next/image"
+
 import Layout from "../Layout/layout"
 import InstagramLogo from "../icons/instagram-logo"
 import TwitterLogo from "../icons/twitter-logo"
 import LinkedInLogo from "../icons/linkedIn-logo"
 import FacebookLogo from "../icons/facebook-logo"
+
+import Logo400px from "../../public/images/logo/next-commerce-logo-400pixel.png"
 
 // import const
 import { FONT_FAMILY } from "@/Consants/FontFamily"
@@ -103,7 +107,12 @@ const Footer = () => {
                     <div className="h-[380px] relative">
                         <div className="flex py-[40px] w-9/12 relative">
                             <div className="w-1/3">
-                                Logo
+                                <div className="w-[200px] h-[200px]">
+                                    <Image src={Logo400px} alt="logo" style={{
+                                        width: '100%',
+                                        height: '100%',
+                                    }} width={300} height={300} />
+                                </div>
                             </div>
                             <div className="w-1/3">
                                 <List menu={mostPopularList} />

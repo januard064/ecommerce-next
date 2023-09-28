@@ -7,6 +7,8 @@ import CategoryProductSection from '@/components/home-page-section/category-prod
 import { getFeaturedProducts, getProducts, getCategoryProducts } from '@/api-helpers/api-utils'
 import { convertCategories } from '@/api-helpers/api-format-utils'
 
+import Head from 'next/head'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home(props) {
@@ -25,6 +27,9 @@ export default function Home(props) {
 
   return (
     <>
+      <Head>
+        <meta name="description" content="Submit message and send your contact" />
+      </Head>
       <CarouselComponent />
 
       <FeaturedProductSection featuredProducts={featuredProducts} goToProductsPage={goToProductsPage} />
