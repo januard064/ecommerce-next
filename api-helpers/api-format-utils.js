@@ -5,8 +5,8 @@ export function convertCategories(categoriesArray) {
     categoriesArray.forEach((category, index) => {
         categoryObjects.push({
             id: index,
-            imagePath: `/images/category-images-asset/${category}.png`,
-            title: category
+            imagePath: `/images/category-images-asset/${category.slug}.png`,
+            title: category.slug
         })
     });
 
